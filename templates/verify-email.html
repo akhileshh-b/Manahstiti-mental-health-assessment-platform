@@ -136,6 +136,21 @@
 
       const account = new Appwrite.Account(client);
 
+      // Function to get the correct base URL for Appwrite redirects
+      function getBaseUrl() {
+        const hostname = window.location.hostname;
+        const port = window.location.port;
+        
+        // For localhost development
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+          return `http://localhost:${port || '5000'}`;
+        }
+        
+        // For production, you'll need to add your production domain here
+        // For now, default to localhost for development
+        return 'http://localhost:5000';
+      }
+
       // Show specific state
       function showState(state) {
         const states = ['loading', 'success', 'error', 'alreadyVerified'];
@@ -199,7 +214,7 @@
           const user = await account.get();
           
           // Send new verification email
-          await account.createVerification(`${window.location.origin}/verify-email`);
+                      await account.createVerification(`${getBaseUrl()}/verify-email`);
           
           // Show success message
           document.getElementById('errorMessage').textContent = 'A new verification email has been sent to your email address.';

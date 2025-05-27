@@ -231,6 +231,21 @@
       const account = new Appwrite.Account(client);
       const databases = new Appwrite.Databases(client);
 
+      // Function to get the correct base URL for Appwrite redirects
+      function getBaseUrl() {
+        const hostname = window.location.hostname;
+        const port = window.location.port;
+        
+        // For localhost development
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+          return `http://localhost:${port || '5000'}`;
+        }
+        
+        // For production, you'll need to add your production domain here
+        // For now, default to localhost for development
+        return 'http://localhost:5000';
+      }
+
       // Database Configuration
       const DATABASE_ID = '6834e4790036ae46ecce';
       const USERS_COLLECTION_ID = '6834e4a100351df915b4';
@@ -333,15 +348,16 @@
           console.log('Attempting Google OAuth with:');
           console.log('Project ID:', client.config.project);
           console.log('Endpoint:', client.config.endpoint);
-          console.log('Success URL:', `${window.location.origin}/assessment`);
-          console.log('Failure URL:', `${window.location.origin}/login`);
+          const baseUrl = getBaseUrl();
+          console.log('Success URL:', `${baseUrl}/assessment`);
+          console.log('Failure URL:', `${baseUrl}/login`);
           
           // Create OAuth2 session with Google
           // The success URL will redirect back to your app after successful authentication
           account.createOAuth2Session(
             'google',
-            `${window.location.origin}/assessment`, // Success redirect
-            `${window.location.origin}/login`       // Failure redirect
+            `${baseUrl}/assessment`, // Success redirect
+            `${baseUrl}/login`       // Failure redirect
           );
           
         } catch (error) {
@@ -433,7 +449,7 @@
           
           // Send email verification
           try {
-            await account.createVerification(`${window.location.origin}/verify-email`);
+                          await account.createVerification(`${getBaseUrl()}/verify-email`);
             console.log('Verification email sent');
           } catch (verificationError) {
             console.warn('Failed to send verification email:', verificationError);
