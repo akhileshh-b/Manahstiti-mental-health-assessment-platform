@@ -235,15 +235,30 @@
       function getBaseUrl() {
         const hostname = window.location.hostname;
         const port = window.location.port;
+        const protocol = window.location.protocol;
         
         // For localhost development
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
           return `http://localhost:${port || '5000'}`;
         }
         
-        // For production, you'll need to add your production domain here
-        // For now, default to localhost for development
-        return 'http://localhost:5000';
+        // For Render deployment
+        if (hostname.includes('onrender.com')) {
+          return `https://${hostname}`;
+        }
+        
+        // For production deployment - automatically detect HTTPS
+        if (protocol === 'https:') {
+          return `https://${hostname}`;
+        }
+        
+        // For other development environments (like local IP)
+        if (port) {
+          return `${protocol}//${hostname}:${port}`;
+        }
+        
+        // Default fallback for production without port
+        return `${protocol}//${hostname}`;
       }
 
       // Database Configuration
