@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Your Results - Manahstiti</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f8fcf8] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7f3e7] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#0d1b0d]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#0d1b0d] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/">Home</a>
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/dashboard">Dashboard</a>
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/resources">Resources</a>
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/about">About</a>
+            </div>
+            
+            <!-- User Profile Dropdown -->
+            <div class="relative">
+              <button
+                id="profileDropdownBtn"
+                onclick="toggleProfileDropdown()"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#f8fcf8] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+              >
+                <!-- User Avatar -->
+                <div class="w-8 h-8 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                  <span id="userInitials">U</span>
+                </div>
+                <!-- User Name -->
+                <span id="userName" class="text-[#0d1b0d] text-sm font-medium hidden sm:block">Loading...</span>
+                <!-- Dropdown Arrow -->
+                <svg id="dropdownArrow" class="w-4 h-4 text-[#4c9a4c] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div
+                id="profileDropdown"
+                class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-[#e7f3e7] py-2 z-50 hidden"
+              >
+                <!-- User Info Section -->
+                <div class="px-4 py-3 border-b border-[#e7f3e7]">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white font-semibold">
+                      <span id="dropdownUserInitials">U</span>
+                    </div>
+                    <div>
+                      <p id="dropdownUserName" class="text-[#0d1b0d] font-medium text-sm">Loading...</p>
+                      <p id="dropdownUserEmail" class="text-[#4c9a4c] text-xs">Loading...</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Menu Items -->
+                <div class="py-1">
+                  <a href="/assessment" class="flex items-center gap-3 px-4 py-2 text-[#0d1b0d] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#4c9a4c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="text-sm">Take Assessment</span>
+                  </a>
+                  
+                  <a href="/profile" class="w-full flex items-center gap-3 px-4 py-2 text-[#0d1b0d] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#4c9a4c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                          </svg>
+                      <span class="text-sm">Edit Profile</span>
+                    </a>
+                  
+                  <a href="/chat" class="flex items-center gap-3 px-4 py-2 text-[#0d1b0d] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#4c9a4c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span class="text-sm">AI Friend</span>
+                  </a>
+                  
+                  <a href="/resources" class="flex items-center gap-3 px-4 py-2 text-[#0d1b0d] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#4c9a4c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <span class="text-sm">Resources</span>
+                  </a>
+                </div>
+                
+                <!-- Divider -->
+                <div class="border-t border-[#e7f3e7] my-1"></div>
+                
+                <!-- Logout -->
+                <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-[#0d1b0d] tracking-light text-[32px] font-bold leading-tight min-w-72">Your Mental Health Check-In Results</p>
+            </div>
+            <div class="p-4 @container">
+              <div class="flex flex-col items-stretch justify-start rounded-xl @xl:flex-row @xl:items-start">
+                <div
+                  id="result-image"
+                  class="w-1/2 bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                  style='background-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop");'
+                ></div>
+                <div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-4 @xl:px-4">
+                  <p id="classification-title" class="text-[#0d1b0d] text-lg font-bold leading-tight tracking-[-0.015em]">Loading...</p>
+                  <div class="flex items-end gap-3 justify-between">
+                    <p id="classification-message" class="text-[#4c9a4c] text-base font-normal leading-normal">
+                      Processing your assessment results...
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-2 mt-3">
+                    <span class="text-[#0d1b0d] text-sm font-medium">Your Score:</span>
+                    <span id="score-display" class="text-lg font-bold text-[#0d1b0d]">--/260</span>
+                    <span id="score-percentage" class="text-sm text-[#4c9a4c]">(--%)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-[#0d1b0d] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Personalized Recommendations</h2>
+            <div id="recommendations-container">
+              <!-- Recommendations will be loaded by JavaScript -->
+            </div>
+            <div class="flex px-4 py-3 justify-center">
+              <button
+                onclick="window.location.href='/resources'"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e7f3e7] text-[#0d1b0d] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Access Additional Resources</span>
+              </button>
+            </div>
+            
+            <!-- Next Steps Section -->
+            <div class="flex flex-col gap-6 p-6 bg-[#e7f3e7] rounded-xl mt-6">
+              <h3 class="text-[#0d1b0d] text-xl font-bold">What's Next?</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <button
+                  onclick="window.location.href='/chat'"
+                  class="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-[#cfe7cf] hover:bg-[#f8fcf8] transition-colors cursor-pointer"
+                >
+                  <div class="w-12 h-12 bg-[#42ef42] rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="#0d1b0d" viewBox="0 0 256 256">
+                      <path d="M216,48H40A16,16,0,0,0,24,64V224a15.84,15.84,0,0,0,9.25,14.5A16.05,16.05,0,0,0,40,240a15.89,15.89,0,0,0,10.25-3.78.69.69,0,0,0,.13-.11L82.5,208H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48ZM40,224h0ZM216,192H82.5a16,16,0,0,0-10.3,3.75l-.12.11L40,224V64H216Z"></path>
+                    </svg>
+                  </div>
+                  <span class="text-[#0d1b0d] font-medium">Chat with AI Friend</span>
+                  <span class="text-[#4c9a4c] text-sm text-center">Get immediate emotional support and guidance</span>
+                </button>
+                
+                <button
+                  onclick="window.location.href='/resources'"
+                  class="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-[#cfe7cf] hover:bg-[#f8fcf8] transition-colors cursor-pointer"
+                >
+                  <div class="w-12 h-12 bg-[#bdeebd] rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="#0d1b0d" viewBox="0 0 256 256">
+                      <path d="M224,152a8,8,0,0,1-8,8H204v48a8,8,0,0,1-16,0V160H176a8,8,0,0,1,0-16h40A8,8,0,0,1,224,152ZM92,172a28,28,0,0,1-28,28H56v8a8,8,0,0,1-16,0V152a8,8,0,0,1,8-8H64A28,28,0,0,1,92,172Zm-16,0a12,12,0,0,0-12-12H56v24h8A12,12,0,0,0,76,172Zm84,0a28,28,0,0,1-28,28h-8v8a8,8,0,0,1-16,0V152a8,8,0,0,1,8-8h16A28,28,0,0,1,160,172Zm-16,0a12,12,0,0,0-12-12h-8v24h8A12,12,0,0,0,144,172ZM40,112V40A16,16,0,0,1,56,24h96a8,8,0,0,1,5.66,2.34l56,56A8,8,0,0,1,216,88v24a8,8,0,0,1-16,0V96H152a8,8,0,0,1-8-8V40H56v72a8,8,0,0,1-16,0ZM160,80h28.69L160,51.31Z"></path>
+                    </svg>
+                  </div>
+                  <span class="text-[#0d1b0d] font-medium">Explore Resources</span>
+                  <span class="text-[#4c9a4c] text-sm text-center">Access curated mental health resources</span>
+                </button>
+                
+                <button
+                  onclick="window.location.href='/assessment'"
+                  class="flex flex-col items-center gap-3 p-4 bg-white rounded-lg border border-[#cfe7cf] hover:bg-[#f8fcf8] transition-colors cursor-pointer"
+                >
+                  <div class="w-12 h-12 bg-[#e9f1e9] rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="#0d1b0d" viewBox="0 0 256 256">
+                      <path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+                    </svg>
+                  </div>
+                  <span class="text-[#0d1b0d] font-medium">Track Progress</span>
+                  <span class="text-[#4c9a4c] text-sm text-center">Retake the assessment weekly to monitor improvement</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Important Notice -->
+            <div class="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg mt-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#f59e0b" viewBox="0 0 256 256" class="mt-0.5">
+                <path d="M236.8,188.09,149.35,36.22h0a24.76,24.76,0,0,0-42.7,0L19.2,188.09a23.51,23.51,0,0,0,0,23.72A24.35,24.35,0,0,0,40.55,224h174.9a24.35,24.35,0,0,0,21.33-12.19A23.51,23.51,0,0,0,236.8,188.09ZM222.93,203.8a8.5,8.5,0,0,1-7.48,4.2H40.55a8.5,8.5,0,0,1-7.48-4.2,7.59,7.59,0,0,1,0-7.72L120.52,44.21a8.75,8.75,0,0,1,15,0l87.45,151.87A7.59,7.59,0,0,1,222.93,203.8ZM120,144V104a8,8,0,0,1,16,0v40a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,180Z"></path>
+              </svg>
+              <div class="flex-1">
+                <p class="text-amber-800 font-medium">Important Reminder</p>
+                <p class="text-amber-700 text-sm mt-1">
+                  This assessment is for informational purposes only and is not a substitute for professional mental health diagnosis or treatment. If you're experiencing severe symptoms or having thoughts of self-harm, please seek immediate professional help or contact crisis support services.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+    
+    <script>
+      // Appwrite Configuration
+      const client = new Appwrite.Client();
+      client
+        .setEndpoint('https://fra.cloud.appwrite.io/v1') // Your Frankfurt endpoint
+        .setProject('manahstiti-mental-health-lays'); // Your project ID
+
+      const account = new Appwrite.Account(client);
+
+      let currentUser = null;
+
+      // Check authentication and update profile
+      async function checkAuthAndUpdateProfile() {
+        try {
+          currentUser = await account.get();
+          console.log('User authenticated:', currentUser);
+          
+          // Update profile information
+          updateProfileInfo(currentUser);
+          
+        } catch (error) {
+          console.error('User not authenticated:', error);
+          // Redirect to login page
+          window.location.href = '/login';
+        }
+      }
+
+      // Update profile information in the UI
+      function updateProfileInfo(user) {
+        const name = user.name || 'User';
+        const email = user.email || '';
+        
+        // Get initials from name
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        // Update header profile
+        document.getElementById('userName').textContent = name;
+        document.getElementById('userInitials').textContent = initials;
+        
+        // Update dropdown profile
+        document.getElementById('dropdownUserName').textContent = name;
+        document.getElementById('dropdownUserEmail').textContent = email;
+        document.getElementById('dropdownUserInitials').textContent = initials;
+      }
+
+      // Toggle profile dropdown
+      function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profileDropdown');
+        const arrow = document.getElementById('dropdownArrow');
+        
+        if (dropdown.classList.contains('hidden')) {
+          dropdown.classList.remove('hidden');
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          dropdown.classList.add('hidden');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('profileDropdown');
+        const button = document.getElementById('profileDropdownBtn');
+        
+        if (dropdown && button && !dropdown.contains(event.target) && !button.contains(event.target)) {
+          dropdown.classList.add('hidden');
+          const arrow = document.getElementById('dropdownArrow');
+          if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+      });
+
+
+
+      // Logout function
+      async function logout() {
+        try {
+          await account.deleteSession('current');
+          window.location.href = '/login';
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '/login';
+        }
+      }
+
+      // Configuration for different mental health states
+      const stateConfig = {
+        'Good': {
+          title: 'Good',
+          message: 'Your mental health is in good shape! Keep up the positive habits and continue prioritizing your well-being. Remember, maintaining good mental health is an ongoing journey.',
+          image: '/static/images/good mental health.png',
+          recommendations: [
+            {
+              title: 'Daily Mindfulness Routine',
+              description: 'Mindfulness helps you slow down and reconnect with the present moment. It reduces stress, improves focus, and builds emotional resilience.',
+              action: 'Start Mindfulness',
+              image: '/static/images/Daily Mindfulness Routine.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'Mindfulness is a practice that helps you slow down and reconnect with the present moment. It reduces stress, improves focus, and builds emotional resilience.',
+                howTo: [
+                  'Find a quiet spot—you don\'t need a yoga mat or incense, just a calm environment.',
+                  'Sit comfortably, close your eyes, and bring attention to your breath.',
+                  'Inhale for 4 seconds, hold for 4, exhale for 4. Repeat for 5 minutes.',
+                  'When your mind wanders (and it will), gently bring it back to the breath without judgment.'
+                ],
+                tryNow: 'Close your eyes and take three slow breaths. Can you feel your chest rise? That\'s step one.',
+                tools: [
+                  { name: 'Smiling Mind – Free Guided Meditations', url: 'https://www.smilingmind.com.au/' },
+                  { name: 'Headspace Basics (Free on YouTube)', url: 'https://www.youtube.com/watch?v=inpok4MKVLM' }
+                ]
+              }
+            },
+            {
+              title: 'Gratitude Journaling',
+              description: 'Gratitude journaling is a powerful mental exercise that strengthens optimism and rewires your brain to spot the good in life.',
+              action: 'Start Journaling',
+              image: '/static/images/Gratitude Journaling.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'Gratitude journaling is a powerful mental exercise. When done daily, it strengthens your optimism and rewires your brain to spot the good in life—even on bad days.',
+                howTo: [
+                  'Write down three things you\'re grateful for today.',
+                  'Be specific. Instead of "family," say "the tea I shared with mom this morning."',
+                  'Over time, this builds perspective and resilience.'
+                ],
+                tryNow: 'Write 3 things you\'re grateful for today: 1.___ 2.___ 3.___',
+                tools: [
+                  { name: 'Gratitude App (Android/iOS)', url: 'https://www.gratefulness.me/' },
+                  { name: 'Greater Good Science Center on Gratitude', url: 'https://greatergood.berkeley.edu/topic/gratitude' }
+                ]
+              }
+            },
+            {
+              title: 'Balanced Lifestyle Tips',
+              description: 'Mental health and physical health go hand-in-hand. Sleep, food, and exercise all play major roles in your mood and energy.',
+              action: 'Learn Balance',
+              image: '/static/images/Balanced Lifestyle Tips.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'Mental health and physical health go hand-in-hand. Sleep, food, and exercise all play major roles in your mood, energy, and focus.',
+                howTo: [
+                  'Sleep: Aim for 7–9 hours per night. Poor sleep can worsen anxiety and depression.',
+                  'Nutrition: A balanced diet fuels your brain. Omega-3s, fruits, veggies, and hydration matter.',
+                  'Movement: Exercise increases feel-good chemicals like dopamine and serotonin.'
+                ],
+                tryNow: 'Choose one area above to improve today. What small action can you take?',
+                tools: [
+                  { name: 'Sleep Foundation Sleep Calculator', url: 'https://www.sleepfoundation.org/how-sleep-works/how-much-sleep-do-we-really-need' },
+                  { name: 'Harvard Nutrition Guide', url: 'https://nutritionsource.hsph.harvard.edu/' }
+                ]
+              }
+            },
+            {
+              title: 'Music Therapy',
+              description: 'Music has powerful effects on mood and emotional well-being. Use it as a tool for relaxation and emotional expression.',
+              action: 'Try Music Therapy',
+              image: '/static/images/Music Therapy.jpg',
+              content: {
+                readTime: '~3 minutes',
+                fullDescription: 'Music therapy can help reduce stress, improve mood, and provide emotional outlet. Different types of music can evoke different emotional responses.',
+                howTo: [
+                  'Create playlists for different moods (calm, energizing, reflective)',
+                  'Listen to calming music during stress',
+                  'Try singing or humming along to boost mood',
+                  'Explore different genres to find what resonates with you'
+                ],
+                tryNow: 'Put on your favorite calming song and focus on the rhythm and melody for 3 minutes.',
+                tools: [
+                  { name: 'Spotify Mood Playlists', url: 'https://open.spotify.com/' },
+                  { name: 'YouTube Music Therapy', url: 'https://www.youtube.com/results?search_query=music+therapy' }
+                ]
+              }
+            },
+            {
+              title: 'Chat with AI Friend',
+              description: 'Connect with our AI companion for immediate emotional support, guidance, and a safe space to express your thoughts and feelings.',
+              action: 'Start AI Chat',
+              image: '/static/images/chatbot.jpg',
+              content: {
+                readTime: '~Available 24/7',
+                fullDescription: 'Our AI friend is designed to provide compassionate, non-judgmental support whenever you need it. It can help you process emotions, practice coping strategies, and provide encouragement during good times.',
+                howTo: [
+                  'Share how you\'re feeling today - there\'s no wrong way to start',
+                  'Ask for coping strategies or mindfulness exercises',
+                  'Practice positive self-talk with AI guidance',
+                  'Use it as a safe space to express thoughts without judgment',
+                  'Get personalized encouragement and motivation'
+                ],
+                tryNow: 'Click "Start AI Chat" to begin a conversation. You can start with "Hi, how are you?" or share what\'s on your mind.',
+                tools: [
+                  { name: 'Start AI Chat Session', url: '/chat' },
+                  { name: 'Learn About AI Mental Health Support', url: 'https://www.who.int/news-room/feature-stories/detail/digital-mental-health-interventions' }
+                ]
+              }
+            }
+          ]
+        },
+        'Moderate': {
+          title: 'Moderate',
+          message: 'You might be experiencing some challenges with your mental health. This is normal and manageable. Consider trying coping strategies and don\'t hesitate to seek support when needed.',
+          image: '/static/images/moderate mental health.png',
+          recommendations: [
+            {
+              title: 'Structured Self-Care Plan',
+              description: 'When life gets heavy, a structured self-care plan is like a safety net. It breaks big responsibilities into small wins you can build on.',
+              action: 'Build Self-Care',
+              image: '/static/images/Structured Self-Care Plan.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'When life gets heavy, even simple tasks like brushing your teeth can feel overwhelming. A structured self-care plan is like a safety net. It breaks big responsibilities into small wins you can build on.',
+                howTo: [
+                  '✅ Wake up & stretch (5 minutes)',
+                  '✅ Drink a glass of water',
+                  '✅ Eat a nourishing meal (even if small)',
+                  '✅ Take a shower or wash your face',
+                  '✅ Do one thing that brings joy or calm',
+                  '✅ Go outside, even briefly',
+                  '✅ Wind down with a relaxing activity'
+                ],
+                tryNow: 'What\'s one self-care item you can do right now—even if it\'s small?',
+                tools: [
+                  { name: 'Self-Care Assessment Worksheet', url: 'https://socialwork.buffalo.edu/content/dam/socialwork/home/self-care-kit/self-care-assessment.pdf' }
+                ]
+              }
+            },
+            {
+              title: 'Guided Meditation & Breathing',
+              description: 'When your mind races or your chest feels tight, your breath is your anchor. Deep breathing lowers cortisol and calms the mind.',
+              action: 'Practice Breathing',
+              image: '/static/images/Guided Meditation  Breathing Exercises.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'When your mind races or your chest feels tight, your breath is your anchor. Guided meditation and breathing retrain your nervous system to switch from "fight or flight" to "rest and digest."',
+                howTo: [
+                  'Box Breathing: Inhale for 4 seconds',
+                  'Hold for 4 seconds',
+                  'Exhale for 4 seconds',
+                  'Hold for 4 seconds',
+                  'Repeat for 4 cycles'
+                ],
+                tryNow: 'Try the box breathing technique right now. Notice how your body feels afterward.',
+                tools: [
+                  { name: '10-Minute Stress Reduction – YouTube', url: 'https://www.youtube.com/watch?v=ZToicYcHIOU' },
+                  { name: 'Breathing Room (Mobile App)', url: 'https://apps.apple.com/us/app/breathing-room/id1532463551' }
+                ]
+              }
+            },
+            {
+              title: 'CBT-Based Journaling',
+              description: 'Cognitive Behavioral Therapy teaches you how to catch, challenge, and change unhelpful thoughts through guided journaling.',
+              action: 'Try CBT Journaling',
+              image: '/static/images/CBT-Based Journaling Prompts.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'Cognitive Behavioral Therapy (CBT) teaches you how to catch, challenge, and change unhelpful thoughts. You can do it yourself through guided journaling.',
+                howTo: [
+                  'Write down a negative thought you had today',
+                  'Ask: What\'s the evidence for this?',
+                  'Ask: Is there another way to see it?',
+                  'Ask: What would I say to a friend in this situation?'
+                ],
+                tryNow: 'Write a recent negative thought, then gently challenge it. What\'s a more compassionate version?',
+                tools: [
+                  { name: 'CBT Thought Record Template', url: 'https://thinkcbt.com/images/Downloads/Thought_Records/EXAMPLE-CBT-THOUGHT_RECORD-V-THINK-CBT-01072020.pdf' },
+                  { name: 'Journal Prompts for Anxiety', url: 'https://positivepsychology.com/journaling-prompts/' }
+                ]
+              }
+            },
+            {
+              title: 'Music Therapy',
+              description: 'Use music as a therapeutic tool to regulate emotions and provide comfort during challenging times.',
+              action: 'Explore Music Therapy',
+              image: '/static/images/Music Therapy.jpg',
+              content: {
+                readTime: '~3 minutes',
+                fullDescription: 'Music therapy can be particularly helpful during moderate mental health challenges, providing emotional regulation and stress relief.',
+                howTo: [
+                  'Create calming playlists for anxiety',
+                  'Use upbeat music to boost mood',
+                  'Try instrumental music for focus',
+                  'Sing or hum to release tension'
+                ],
+                tryNow: 'Listen to a calming song and focus on slow, deep breathing while you listen.',
+                tools: [
+                  { name: 'Calm Music Playlists', url: 'https://open.spotify.com/search/calm%20music' },
+                  { name: 'Nature Sounds for Relaxation', url: 'https://www.youtube.com/results?search_query=nature+sounds+relaxation' }
+                ]
+              }
+            },
+            {
+              title: 'Chat with AI Friend',
+              description: 'Talk to our AI companion when you need someone to listen. Get personalized coping strategies and emotional support during challenging moments.',
+              action: 'Start AI Chat',
+              image: '/static/images/chatbot.jpg',
+              content: {
+                readTime: '~Available 24/7',
+                fullDescription: 'When you\'re experiencing moderate mental health challenges, having someone to talk to can make a significant difference. Our AI friend provides a safe, judgment-free space to express your feelings and receive personalized support.',
+                howTo: [
+                  'Describe what you\'re going through - the AI will listen without judgment',
+                  'Ask for specific coping strategies for anxiety, stress, or low mood',
+                  'Practice breathing exercises or mindfulness with AI guidance',
+                  'Get encouragement and validation for your feelings',
+                  'Explore thought patterns and receive gentle cognitive reframing'
+                ],
+                tryNow: 'Start a conversation by sharing one thing that\'s been weighing on your mind today.',
+                tools: [
+                  { name: 'Start AI Chat Session', url: '/chat' },
+                  { name: 'Crisis Support Resources', url: '/crisis' }
+                ]
+              }
+            }
+          ]
+        },
+        'Poor': {
+          title: 'Needs Attention',
+          message: 'It looks like you\'re going through a difficult time. Please consider reaching out to a mental health professional or trusted person for support. You don\'t have to face this alone.',
+          image: '/static/images/poor mental health.png',
+          recommendations: [
+            {
+              title: 'Crisis Support',
+              description: 'If you\'re feeling overwhelmed, numb, scared, or on the edge—pause. You are not alone, and you do not need to go through this in silence.',
+              action: 'Get Help Now',
+              image: '/static/images/Crisis Support Button Emergency Help.jpg',
+              content: {
+                readTime: 'Immediate',
+                fullDescription: 'If you\'re feeling overwhelmed, numb, scared, or on the edge—pause. This is your sign to reach out. You are not alone, and you do not need to go through this in silence.',
+                howTo: [
+                  'Breathe deeply for 10 seconds',
+                  'Say aloud: "This feeling is not forever"',
+                  'Call one of the crisis numbers below',
+                  'Reach out to a trusted friend or family member'
+                ],
+                tryNow: 'Take three deep breaths right now. You are worthy of support.',
+                tools: [
+                  { name: 'iCall India (Free Helpline)', url: 'https://www.tiss.edu/view/6/projects/all-projects/icall/' },
+                  { name: 'AASRA India (24/7 Support)', url: 'https://www.aasra.info' },
+                  { name: '988 Suicide & Crisis Lifeline (US)', url: 'https://988lifeline.org' },
+                  { name: 'Crisis Text Line (US)', url: 'https://www.crisistextline.org' }
+                ]
+              }
+            },
+            {
+              title: 'Professional Referral System',
+              description: 'Therapy is not a last resort—it\'s a first step toward healing. Mental health professionals can help you feel seen and understood.',
+              action: 'Find a Therapist',
+              image: '/static/images/Professional Referral System.jpg',
+              content: {
+                readTime: '~5 minutes',
+                fullDescription: 'Mental health professionals can help you feel seen, understood, and better equipped to deal with life\'s pain. You don\'t need to wait until you\'re in crisis to seek help.',
+                howTo: [
+                  'Pick a format: in-person or online',
+                  'Choose a trusted platform',
+                  'Book a 15-min intro session',
+                  'Remember: You talk, they listen and guide'
+                ],
+                tryNow: 'Research one therapy platform today. Taking the first step is courageous.',
+                tools: [
+                  { name: 'Therapists in India – Therapy Route', url: 'https://www.therapyroute.com' },
+                  { name: 'Psychology Today Therapist Finder', url: 'https://www.psychologytoday.com' },
+                  { name: 'BetterHelp Online Therapy', url: 'https://www.betterhelp.com' },
+                  { name: 'Talkspace Online Counseling', url: 'https://www.talkspace.com' }
+                ]
+              }
+            },
+            {
+              title: 'Simplified Routine Builder',
+              description: 'On tough days, routines are anchors. They reduce decision fatigue and give your brain something predictable to hold on to.',
+              action: 'Create Routine',
+              image: '/static/images/Simplified Routine Builder.jpg',
+              content: {
+                readTime: '~3 minutes',
+                fullDescription: 'On tough days, routines are anchors. They reduce decision fatigue and give your brain something predictable to hold on to.',
+                howTo: [
+                  'Wake-up time (even if late)',
+                  'Brush teeth or wash face',
+                  'One meal (even light)',
+                  '5-minute movement or sunlight',
+                  'Quiet time (music, journaling)'
+                ],
+                tryNow: 'Make a list of your "Bare Minimum Day" tasks. Not perfection—just survival.',
+                tools: [
+                  { name: 'Mental Health Daily Routine – Blurt It Out', url: 'https://www.blurtitout.org/2020/12/08/mental-health-routine' },
+                  { name: 'Everyday Mental Wellness – Mind UK', url: 'https://www.mind.org.uk/information-support/tips-for-everyday-living/' }
+                ]
+              }
+            },
+            {
+              title: 'Music Therapy for Healing',
+              description: 'Music can provide comfort and emotional release during the darkest times. Use it as a gentle companion in your healing journey.',
+              action: 'Find Comfort in Music',
+              image: '/static/images/Music Therapy.jpg',
+              content: {
+                readTime: '~3 minutes',
+                fullDescription: 'Music therapy can be a gentle, non-threatening way to process difficult emotions and find moments of peace during challenging times.',
+                howTo: [
+                  'Start with soft, instrumental music',
+                  'Allow yourself to feel whatever comes up',
+                  'Try humming or gentle singing',
+                  'Create a "comfort" playlist for difficult moments'
+                ],
+                tryNow: 'Put on a gentle, comforting song and just breathe. You don\'t have to do anything else.',
+                tools: [
+                  { name: 'Healing Music Playlists', url: 'https://open.spotify.com/search/healing%20music' },
+                  { name: 'Guided Music Meditation', url: 'https://www.youtube.com/results?search_query=guided+music+meditation+healing' }
+                ]
+              }
+            },
+            {
+              title: 'Chat with AI Friend',
+              description: 'When everything feels overwhelming, our AI companion offers a safe space to express your deepest feelings without fear of judgment or burden.',
+              action: 'Start AI Chat',
+              image: '/static/images/chatbot.jpg',
+              content: {
+                readTime: '~Available 24/7',
+                fullDescription: 'During your most difficult moments, you don\'t have to face the darkness alone. Our AI friend is here to listen, validate your pain, and gently guide you toward hope and healing. It\'s designed to recognize when you need extra support and can help connect you with professional resources.',
+                howTo: [
+                  'Share your feelings honestly - there\'s no need to minimize your pain',
+                  'Ask for immediate coping strategies when you\'re in crisis',
+                  'Request grounding techniques to help you feel more stable',
+                  'Get gentle reminders of your worth and reasons to keep going',
+                  'Receive guidance on when and how to seek professional help'
+                ],
+                tryNow: 'You don\'t have to say much. Start with "I\'m struggling" or "I need help" - the AI will meet you where you are.',
+                tools: [
+                  { name: 'Start AI Chat Session', url: '/chat' },
+                  { name: 'Crisis Support Hotlines', url: '/crisis' },
+                  { name: 'Find Professional Help', url: '/resources' }
+                ]
+              }
+            }
+          ]
+        }
+      };
+
+      function displayResults() {
+        // Get results from sessionStorage
+        const resultsData = sessionStorage.getItem('assessmentResults');
+        
+        if (!resultsData) {
+          // Redirect to assessment if no results found
+          window.location.href = '/assessment';
+          return;
+        }
+
+        const results = JSON.parse(resultsData);
+        const config = stateConfig[results.classification];
+        
+        if (!config) {
+          console.error('Unknown classification:', results.classification);
+          return;
+        }
+
+        // Update main result display
+        document.getElementById('result-image').style.backgroundImage = `url("${config.image}")`;
+        document.getElementById('classification-title').textContent = config.title;
+        document.getElementById('classification-message').textContent = config.message;
+        
+        // Update score display
+        const scorePercentage = Math.round((results.score / results.max_score) * 100);
+        document.getElementById('score-display').textContent = `${results.score}/${results.max_score}`;
+        document.getElementById('score-percentage').textContent = `(${scorePercentage}%)`;
+        
+        // Display recommendations
+        displayRecommendations(config.recommendations);
+      }
+
+      function displayRecommendations(recommendations) {
+        storeCurrentRecommendations(recommendations); // Store for modal access
+        
+        const container = document.getElementById('recommendations-container');
+        container.innerHTML = '';
+        
+        recommendations.forEach((rec, index) => {
+          const recElement = document.createElement('div');
+          recElement.className = 'p-4';
+          
+          recElement.innerHTML = `
+            <div class="flex items-stretch justify-between gap-4 rounded-xl cursor-pointer hover:bg-[#f8fcf8] transition-colors duration-200" onclick="openRecommendationModal(${index})">
+              <div class="flex flex-[2_2_0px] flex-col gap-4">
+                <div class="flex flex-col gap-1">
+                  <p class="text-[#0d1b0d] text-base font-bold leading-tight">${rec.title}</p>
+                  <p class="text-[#4c9a4c] text-sm font-normal leading-normal">
+                    ${rec.description}
+                  </p>
+                </div>
+                <button
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 flex-row-reverse bg-[#e7f3e7] text-[#0d1b0d] pr-2 gap-1 text-sm font-medium leading-normal w-fit"
+                  onclick="event.stopPropagation(); openRecommendationModal(${index})"
+                >
+                  <div class="text-[#0d1b0d]" data-icon="ArrowRight" data-size="18px" data-weight="regular">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="truncate">${rec.action}</span>
+                </button>
+              </div>
+              <div
+                class="w-1/4 bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                style='background-image: url("${rec.image}");'
+              ></div>
+            </div>
+          `;
+          
+          container.appendChild(recElement);
+        });
+      }
+
+      function handleRecommendationAction(action) {
+        // Handle different recommendation actions
+        switch(action) {
+          case 'Start Journaling':
+          case 'Begin Meditation':
+          case 'Practice Breathing':
+          case 'Learn Techniques':
+          case 'Create Routine':
+          case 'Try Music Therapy':
+          case 'Explore Music Therapy':
+          case 'Find Comfort in Music':
+            window.location.href = '/resources';
+            break;
+          case 'Find Support Groups':
+          case 'Join Support Groups':
+            window.location.href = '/chat';
+            break;
+          case 'Start AI Chat':
+            window.location.href = '/chat';
+            break;
+          case 'Find a Therapist':
+          case 'Get Help Now':
+            window.location.href = '/crisis';
+            break;
+          default:
+            window.location.href = '/resources';
+        }
+      }
+
+      // Global variable to store current recommendations
+      let currentRecommendations = [];
+
+      // Add this function to store recommendations globally
+      function storeCurrentRecommendations(recommendations) {
+        currentRecommendations = recommendations;
+      }
+
+      function openRecommendationModal(index) {
+        const rec = currentRecommendations[index];
+        if (!rec || !rec.content) return;
+
+        // Scale down the background slightly for 3D effect
+        document.querySelector('.layout-container').style.transform = 'scale(0.95)';
+        document.querySelector('.layout-container').style.transition = 'transform 0.3s ease-out';
+
+        // Create modal overlay with semi-transparent background (no blur for better depth)
+        const modalOverlay = document.createElement('div');
+        modalOverlay.id = 'recommendation-modal';
+        modalOverlay.className = 'fixed inset-0 z-50 flex items-center justify-center p-4';
+        modalOverlay.style.backgroundColor = 'rgba(13, 27, 13, 0.3)'; // Semi-transparent, no blur
+        modalOverlay.onclick = (e) => {
+          if (e.target === modalOverlay) closeRecommendationModal();
+        };
+
+        // Create modal content with enhanced 3D shadow
+        const modalContent = document.createElement('div');
+        modalContent.className = 'bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto relative';
+        modalContent.style.boxShadow = `
+          0 25px 50px -12px rgba(0, 0, 0, 0.25),
+          0 15px 25px -8px rgba(0, 0, 0, 0.15),
+          0 8px 16px -4px rgba(0, 0, 0, 0.1)
+        `;
+        modalContent.style.transform = 'translateY(-20px)';
+        modalContent.style.animation = 'modalSlideIn 0.3s ease-out forwards';
+
+        modalContent.innerHTML = `
+          <div class="relative">
+            <!-- Close button -->
+            <button onclick="closeRecommendationModal()" class="absolute top-4 right-4 z-10 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+              </svg>
+            </button>
+
+            <!-- Header with image -->
+            <div class="w-full h-48 bg-center bg-cover rounded-t-2xl" style='background-image: url("${rec.image}");'></div>
+            
+            <!-- Content -->
+            <div class="p-6">
+              <div class="flex items-center gap-2 mb-4">
+                <span class="px-3 py-1 bg-[#e7f3e7] text-[#0d1b0d] text-sm font-medium rounded-full">
+                  Read Time: ${rec.content.readTime}
+                </span>
+              </div>
+              
+              <h2 class="text-2xl font-bold text-[#0d1b0d] mb-3">${rec.title}</h2>
+              
+              <p class="text-[#4c9a4c] text-base leading-relaxed mb-6">
+                ${rec.content.fullDescription}
+              </p>
+
+              <!-- How to section -->
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-[#0d1b0d] mb-3">How to Practice:</h3>
+                <ul class="space-y-2">
+                  ${rec.content.howTo.map(step => `
+                    <li class="flex items-start gap-3">
+                      <div class="w-2 h-2 bg-[#42ef42] rounded-full mt-2 flex-shrink-0"></div>
+                      <span class="text-[#0d1b0d] text-sm leading-relaxed">${step}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+
+              <!-- Try now section -->
+              <div class="bg-[#f8fcf8] rounded-xl p-4 mb-6">
+                <h4 class="font-semibold text-[#0d1b0d] mb-2">💡 Try This Now:</h4>
+                <p class="text-[#4c9a4c] text-sm leading-relaxed">${rec.content.tryNow}</p>
+              </div>
+
+              <!-- Helpful tools -->
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-[#0d1b0d] mb-3">Helpful Resources:</h3>
+                <div class="space-y-2">
+                  ${rec.content.tools.map(tool => `
+                    <a href="${tool.url}" target="_blank" 
+                       class="flex items-center justify-between p-3 bg-white border border-[#e7f3e7] rounded-lg hover:bg-[#f8fcf8] transition-colors group">
+                      <span class="text-[#0d1b0d] text-sm font-medium">${tool.name}</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" fill="currentColor" viewBox="0 0 256 256" class="text-[#4c9a4c] group-hover:translate-x-1 transition-transform">
+                        <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                      </svg>
+                    </a>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- Action button -->
+              <button onclick="closeRecommendationModal(); handleRecommendationAction('${rec.action}')" 
+                      class="w-full bg-[#42ef42] text-[#0d1b0d] font-semibold py-3 px-6 rounded-xl hover:bg-[#38d938] transition-colors">
+                ${rec.action}
+              </button>
+            </div>
+          </div>
+        `;
+
+        modalOverlay.appendChild(modalContent);
+        document.body.appendChild(modalOverlay);
+      }
+
+      function closeRecommendationModal() {
+        const modal = document.getElementById('recommendation-modal');
+        if (modal) {
+          // Reset background scale
+          document.querySelector('.layout-container').style.transform = 'scale(1)';
+          
+          // Animate modal out
+          const modalContent = modal.querySelector('.bg-white');
+          modalContent.style.animation = 'modalSlideOut 0.2s ease-in forwards';
+          
+          setTimeout(() => {
+            modal.remove();
+          }, 200);
+        }
+      }
+
+      // Update displayRecommendations to store recommendations globally
+
+
+      // Load results when page loads
+      window.onload = function() {
+        checkAuthAndUpdateProfile();
+        displayResults();
+      };
+    </script>
+
+    <!-- CSS for modal animations -->
+    <style>
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes modalSlideOut {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.95);
+        }
+      }
+
+      /* Custom scrollbar for modal */
+      #recommendation-modal .overflow-y-auto::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      #recommendation-modal .overflow-y-auto::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 3px;
+      }
+
+      #recommendation-modal .overflow-y-auto::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 3px;
+      }
+
+      #recommendation-modal .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+    </style>
+  </body>
+</html> 

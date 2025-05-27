@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Crisis Support - Manahstiti</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e9f1e9] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#101910]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#101910] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#101910] text-sm font-medium leading-normal" href="/">Home</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal" href="/about">About</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal" href="/resources">Resources</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal font-bold text-[#57d557]" href="/crisis">Crisis Support</a>
+            </div>
+            <button
+              onclick="window.location.href='/assessment'"
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#57d557] text-[#101910] text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Start Assessment</span>
+            </button>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <!-- Emergency Alert Banner -->
+            <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6 rounded-r-lg">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-red-700">
+                    <strong>If you're in immediate danger or having thoughts of self-harm, please call emergency services (100/102) or go to your nearest emergency room immediately.</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assessment Disclaimer -->
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-6 rounded-r-lg">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <p class="text-sm text-amber-700">
+                    <strong>Important:</strong> If you received a "poor mental health" score from our assessment, please don't rely completely on this result. Assessment tools are helpful but not definitive. <strong>Your life matters immensely</strong> - please seek professional support first. A trained counselor can provide proper evaluation and care that you deserve.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex min-w-72 flex-col gap-3">
+                <p class="text-[#101910] tracking-light text-[32px] font-bold leading-tight">Crisis Support - India</p>
+                <p class="text-[#588d58] text-sm font-normal leading-normal">
+                  If you're feeling overwhelmed, unsafe, or in emotional pain — please don't face it alone. Help is available, right now.
+                </p>
+              </div>
+            </div>
+
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">🔴 Emergency Mental Health Helplines (India)</h2>
+            <p class="text-[#101910] text-base font-normal leading-normal pb-3 pt-1 px-4">These services are free, confidential, and run by trained professionals.</p>
+            
+            <!-- iCall -->
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-[72px] py-2 justify-between border-b border-[#e9f1e9]">
+              <div class="flex items-center gap-4">
+                <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-12">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80A40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <p class="text-[#101910] text-base font-medium leading-normal line-clamp-1">iCall (TISS Mumbai)</p>
+                  <p class="text-[#588d58] text-sm font-normal leading-normal line-clamp-2">Free emotional support from trained counselors.</p>
+                  <p class="text-[#101910] text-sm font-bold">📞 022-2556-3291 | Mon-Sat 8AM-10PM</p>
+                </div>
+              </div>
+              <div class="shrink-0">
+                <a href="https://www.tiss.edu/view/6/projects/all-projects/icall/" target="_blank" class="text-[#57d557] text-sm font-medium hover:underline">Visit Website</a>
+              </div>
+            </div>
+
+            <!-- AASRA -->
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-[72px] py-2 justify-between border-b border-[#e9f1e9]">
+              <div class="flex items-center gap-4">
+                <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-12">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80A40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <p class="text-[#101910] text-base font-medium leading-normal line-clamp-1">AASRA (24/7 Suicide Prevention)</p>
+                  <p class="text-[#588d58] text-sm font-normal leading-normal line-clamp-2">Help for people in emotional distress.</p>
+                  <p class="text-[#101910] text-sm font-bold">📞 022-2754-6669 | 24/7 Available</p>
+                </div>
+              </div>
+              <div class="shrink-0">
+                <a href="https://www.aasra.info" target="_blank" class="text-[#57d557] text-sm font-medium hover:underline">Visit Website</a>
+              </div>
+            </div>
+
+            <!-- Vandrevala Foundation -->
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-[72px] py-2 justify-between border-b border-[#e9f1e9]">
+              <div class="flex items-center gap-4">
+                <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-12">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80A40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <p class="text-[#101910] text-base font-medium leading-normal line-clamp-1">Vandrevala Foundation Helpline</p>
+                  <p class="text-[#588d58] text-sm font-normal leading-normal line-clamp-2">Mental health support via phone, chat & WhatsApp.</p>
+                  <p class="text-[#101910] text-sm font-bold">📞 1860-2662-345 | 24/7 Available</p>
+                </div>
+              </div>
+              <div class="shrink-0">
+                <a href="https://www.vandrevalafoundation.com" target="_blank" class="text-[#57d557] text-sm font-medium hover:underline">Visit Website</a>
+              </div>
+            </div>
+
+            <!-- Fortis Stress Helpline -->
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-[72px] py-2 justify-between border-b border-[#e9f1e9]">
+              <div class="flex items-center gap-4">
+                <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-12">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80A40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <p class="text-[#101910] text-base font-medium leading-normal line-clamp-1">Fortis Stress Helpline</p>
+                  <p class="text-[#588d58] text-sm font-normal leading-normal line-clamp-2">Psychiatrists on call - Run by Fortis Healthcare.</p>
+                  <p class="text-[#101910] text-sm font-bold">📞 8376-804-102 | 24/7 Available</p>
+                </div>
+              </div>
+              <div class="shrink-0">
+                <a href="https://www.fortishealthcare.com/mental-health" target="_blank" class="text-[#57d557] text-sm font-medium hover:underline">Visit Website</a>
+              </div>
+            </div>
+
+            <!-- Snehi -->
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-[72px] py-2 justify-between border-b border-[#e9f1e9]">
+              <div class="flex items-center gap-4">
+                <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-12">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80A40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path>
+                  </svg>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <p class="text-[#101910] text-base font-medium leading-normal line-clamp-1">Snehi (Delhi-based support)</p>
+                  <p class="text-[#588d58] text-sm font-normal leading-normal line-clamp-2">Youth and family mental health services.</p>
+                  <p class="text-[#101910] text-sm font-bold">📞 011-2405-4040 | Mon-Fri 10AM-6PM</p>
+                </div>
+              </div>
+              <div class="shrink-0">
+                <a href="http://www.snehi.org/" target="_blank" class="text-[#57d557] text-sm font-medium hover:underline">Visit Website</a>
+              </div>
+            </div>
+
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">🧘 Immediate Steps You Can Take</h2>
+            
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"></path>
+                </svg>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">Call or WhatsApp a helpline — even if you're unsure what to say.</p>
+            </div>
+
+            <div class="flex gap-4 bg-[#f9fbf9] px-4 py-3 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-12">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"></path>
+                </svg>
+              </div>
+              <div class="flex flex-1 flex-col justify-center">
+                <p class="text-[#101910] text-base font-medium leading-normal">Use the 5-4-3-2-1 grounding technique if you're panicking:</p>
+                <p class="text-[#588d58] text-sm font-normal leading-normal">
+                  5 things you can see • 4 things you can touch • 3 things you hear • 2 things you smell • 1 thing you taste
+                </p>
+                <p class="text-[#588d58] text-sm font-normal leading-normal italic">(Breathe slowly while doing this.)</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"></path>
+                </svg>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">Tell someone you trust. A friend, family member, or teacher.</p>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                  <path d="M80,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H88A8,8,0,0,1,80,64Zm136,56H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Zm0,64H88a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16ZM44,52A12,12,0,1,0,56,64,12,12,0,0,0,44,52Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,116Zm0,64a12,12,0,1,0,12,12A12,12,0,0,0,44,180Z"></path>
+                </svg>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">Remove yourself from immediate danger or harmful situations.</p>
+            </div>
+
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">🧾 What You Can Say</h2>
+            <p class="text-[#101910] text-base font-normal leading-normal pb-3 pt-1 px-4">When you call a helpline, you don't need to explain everything. You can start with:</p>
+            
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">💬</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">"I'm feeling really overwhelmed and need someone to talk to."</p>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">💬</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">"I don't feel okay. Can you help me?"</p>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">💬</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">"I'm having thoughts of hurting myself."</p>
+            </div>
+
+            <p class="text-[#101910] text-base font-normal leading-normal pb-3 pt-3 px-4">They'll take it from there. No judgment. Just help.</p>
+
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">📢 Important Reminders</h2>
+            
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">❤️</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">You are not alone.</p>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">🩺</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">Mental health problems are real and treatable.</p>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">💪</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">Reaching out is brave, not weak.</p>
+            </div>
+
+            <div class="flex items-center gap-4 bg-[#f9fbf9] px-4 min-h-14 border-b border-[#e9f1e9]">
+              <div class="text-[#101910] flex items-center justify-center rounded-lg bg-[#e9f1e9] shrink-0 size-10">
+                <span class="text-lg">🌅</span>
+              </div>
+              <p class="text-[#101910] text-base font-normal leading-normal flex-1">This feeling is temporary. Things can and will get better.</p>
+            </div>
+
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">💬 Regional Language Support</h2>
+            <p class="text-[#101910] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              Many helplines offer support in Hindi, Marathi, Bengali, Tamil, Telugu, and more. You can ask for a language you're comfortable with when you call.
+            </p>
+
+            <!-- Quick Action Buttons -->
+            <div class="bg-[#e9f1e9] rounded-xl p-6 mt-6">
+              <h3 class="text-[#101910] text-lg font-bold mb-4">Quick Actions</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onclick="window.location.href='/assessment'" class="bg-[#57d557] text-[#101910] font-semibold py-3 px-6 rounded-xl hover:bg-[#4bc94b] transition-colors">
+                  Take Mental Health Assessment
+                </button>
+                <button onclick="window.location.href='/resources'" class="bg-white text-[#101910] font-semibold py-3 px-6 rounded-xl border border-[#57d557] hover:bg-[#f8fcf8] transition-colors">
+                  Browse Mental Health Resources
+                </button>
+              </div>
+            </div>
+
+            <!-- Emergency Contacts Card -->
+            <div class="bg-red-50 border border-red-200 rounded-xl p-6 mt-6">
+              <h3 class="text-red-800 text-lg font-bold mb-4">🚨 Emergency Contacts</h3>
+              <div class="space-y-2">
+                <p class="text-red-700"><strong>Police Emergency:</strong> 100</p>
+                <p class="text-red-700"><strong>Medical Emergency:</strong> 102</p>
+                <p class="text-red-700"><strong>Fire Emergency:</strong> 101</p>
+                <p class="text-red-700"><strong>Women's Helpline:</strong> 1091</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html> 

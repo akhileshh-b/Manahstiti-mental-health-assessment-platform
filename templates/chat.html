@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Chat with AI Friend - Manahstiti</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f8fcf8] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7f3e7] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#0d1b0d]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#0d1b0d] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal" href="/">Home</a>
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal" href="/about">About</a>
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal" href="/resources">Resources</a>
+              <a class="text-[#0d1b0d] text-sm font-medium leading-normal" href="/crisis">Crisis Support</a>
+            </div>
+            <div class="flex gap-2">
+              <button
+                onclick="window.location.href='/assessment'"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#bdeebd] text-[#0d1b0d] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Take Assessment</span>
+              </button>
+              <button
+                onclick="window.location.href='/crisis'"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#42ef42] text-[#0d1b0d] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Crisis Support</span>
+              </button>
+            </div>
+          </div>
+        </header>
+        
+        <div class="flex flex-1">
+          <!-- Chat Container -->
+          <div class="flex-1 flex flex-col max-w-4xl mx-auto px-6 py-4">
+            
+            <!-- Chat Header -->
+            <div class="flex items-center gap-4 p-4 bg-white rounded-lg border border-[#e7f3e7] mb-4">
+              <div class="w-12 h-12 bg-[#42ef42] rounded-full flex items-center justify-center text-2xl">
+                🤖
+              </div>
+              <div>
+                <h2 class="text-[#0d1b0d] text-lg font-bold">AI Friend</h2>
+                <p class="text-[#4c9a4c] text-sm">Your empathetic companion for mental health support</p>
+              </div>
+              <div class="ml-auto flex items-center gap-2">
+                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span class="text-[#4c9a4c] text-sm">Online</span>
+              </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 bg-white rounded-lg border border-[#e7f3e7] mb-4 min-h-[400px] max-h-[500px]">
+              <!-- Welcome message -->
+              <div class="flex gap-3 mb-4">
+                <div class="w-8 h-8 bg-[#42ef42] rounded-full flex items-center justify-center text-sm">🤖</div>
+                <div class="flex-1">
+                  <div class="bg-[#e7f3e7] rounded-lg p-3 max-w-md">
+                    <p class="text-[#0d1b0d] text-sm">
+                      Hi there! I'm your AI friend from Manahstiti. I'm here to listen, support, and help you through whatever you're experiencing. How are you feeling today? 😊
+                    </p>
+                  </div>
+                  <p class="text-[#4c9a4c] text-xs mt-1">Just now</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="flex gap-3 p-4 bg-white rounded-lg border border-[#e7f3e7]">
+              <input
+                type="text"
+                id="message-input"
+                placeholder="Type your message here..."
+                class="flex-1 p-3 border border-[#d3e4d3] rounded-lg focus:outline-none focus:border-[#42ef42] focus:ring-1 focus:ring-[#42ef42]"
+                onkeypress="handleKeyPress(event)"
+              />
+              <button
+                onclick="sendMessage()"
+                id="send-button"
+                class="px-6 py-3 bg-[#42ef42] text-[#0d1b0d] rounded-lg font-medium hover:bg-[#38d138] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Send
+              </button>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="flex gap-2 mt-4 flex-wrap">
+              <button onclick="sendQuickMessage('I\'m feeling stressed about exams')" class="px-3 py-2 bg-[#bdeebd] text-[#0d1b0d] text-sm rounded-full hover:bg-[#a8e6a8] transition-colors">
+                Exam stress
+              </button>
+              <button onclick="sendQuickMessage('I\'m feeling lonely lately')" class="px-3 py-2 bg-[#bdeebd] text-[#0d1b0d] text-sm rounded-full hover:bg-[#a8e6a8] transition-colors">
+                Feeling lonely
+              </button>
+              <button onclick="sendQuickMessage('I\'m having trouble sleeping')" class="px-3 py-2 bg-[#bdeebd] text-[#0d1b0d] text-sm rounded-full hover:bg-[#a8e6a8] transition-colors">
+                Sleep issues
+              </button>
+              <button onclick="sendQuickMessage('I need motivation')" class="px-3 py-2 bg-[#bdeebd] text-[#0d1b0d] text-sm rounded-full hover:bg-[#a8e6a8] transition-colors">
+                Need motivation
+              </button>
+              <button onclick="clearMemory()" class="px-3 py-2 bg-red-100 text-red-700 text-sm rounded-full hover:bg-red-200 transition-colors">
+                🗑️ Clear Memory
+              </button>
+            </div>
+
+            <!-- Privacy Notice -->
+            <div class="mt-4 p-3 bg-[#e7f3e7] rounded-lg">
+              <p class="text-[#4c9a4c] text-xs text-center">
+                💬 This conversation is private and anonymous. Your messages are not stored permanently. 
+                If you're in crisis, please reach out to <a href="/crisis" class="underline font-medium">crisis support</a> immediately.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let isTyping = false;
+      let userId = 'user_' + Math.random().toString(36).substr(2, 9); // Generate unique user ID for this session
+
+      function handleKeyPress(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+          event.preventDefault();
+          sendMessage();
+        }
+      }
+
+      function sendQuickMessage(message) {
+        document.getElementById('message-input').value = message;
+        sendMessage();
+      }
+
+      async function sendMessage() {
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const message = messageInput.value.trim();
+
+        if (!message || isTyping) return;
+
+        // Clear input and disable button
+        messageInput.value = '';
+        sendButton.disabled = true;
+        sendButton.textContent = 'Sending...';
+
+        // Add user message to chat
+        addMessage(message, 'user');
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        try {
+          const response = await fetch('/api/chatbot', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              message: message,
+              user_id: userId 
+            })
+          });
+
+          const data = await response.json();
+
+          // Remove typing indicator
+          removeTypingIndicator();
+
+          if (response.ok) {
+            // Add AI response to chat
+            addMessage(data.response, 'ai');
+            
+            // Show status if not success
+            if (data.status !== 'success') {
+              addStatusMessage(data.message || 'Using fallback response');
+            }
+          } else {
+            addMessage('I apologize, but I\'m having trouble responding right now. Please try again in a moment, or reach out to someone you trust if you need immediate support.', 'ai');
+          }
+        } catch (error) {
+          console.error('Error sending message:', error);
+          removeTypingIndicator();
+          addMessage('I\'m sorry, I\'m having connection issues. Please try again. If you need immediate help, please contact crisis support.', 'ai');
+        }
+
+        // Re-enable send button
+        sendButton.disabled = false;
+        sendButton.textContent = 'Send';
+        messageInput.focus();
+      }
+
+      function addMessage(message, sender) {
+        const chatMessages = document.getElementById('chat-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'flex gap-3 mb-4';
+
+        if (sender === 'user') {
+          messageDiv.innerHTML = `
+            <div class="flex-1"></div>
+            <div class="flex-1 max-w-md">
+              <div class="bg-[#42ef42] rounded-lg p-3 ml-auto">
+                <p class="text-[#0d1b0d] text-sm">${escapeHtml(message)}</p>
+              </div>
+              <p class="text-[#4c9a4c] text-xs mt-1 text-right">Just now</p>
+            </div>
+            <div class="w-8 h-8 bg-[#bdeebd] rounded-full flex items-center justify-center text-sm">👤</div>
+          `;
+        } else {
+          messageDiv.innerHTML = `
+            <div class="w-8 h-8 bg-[#42ef42] rounded-full flex items-center justify-center text-sm">🤖</div>
+            <div class="flex-1">
+              <div class="bg-[#e7f3e7] rounded-lg p-3 max-w-md">
+                <p class="text-[#0d1b0d] text-sm">${escapeHtml(message)}</p>
+              </div>
+              <p class="text-[#4c9a4c] text-xs mt-1">Just now</p>
+            </div>
+          `;
+        }
+
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function addStatusMessage(message) {
+        const chatMessages = document.getElementById('chat-messages');
+        const statusDiv = document.createElement('div');
+        statusDiv.className = 'flex justify-center mb-4';
+        statusDiv.innerHTML = `
+          <div class="bg-yellow-100 border border-yellow-300 rounded-lg p-2 max-w-md">
+            <p class="text-yellow-800 text-xs text-center">${escapeHtml(message)}</p>
+          </div>
+        `;
+        chatMessages.appendChild(statusDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function showTypingIndicator() {
+        if (isTyping) return;
+        isTyping = true;
+
+        const chatMessages = document.getElementById('chat-messages');
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing-indicator';
+        typingDiv.className = 'flex gap-3 mb-4';
+        typingDiv.innerHTML = `
+          <div class="w-8 h-8 bg-[#42ef42] rounded-full flex items-center justify-center text-sm">🤖</div>
+          <div class="flex-1">
+            <div class="bg-[#e7f3e7] rounded-lg p-3 max-w-md">
+              <div class="flex items-center gap-1">
+                <div class="w-2 h-2 bg-[#4c9a4c] rounded-full animate-bounce"></div>
+                <div class="w-2 h-2 bg-[#4c9a4c] rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                <div class="w-2 h-2 bg-[#4c9a4c] rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+              </div>
+            </div>
+          </div>
+        `;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function removeTypingIndicator() {
+        isTyping = false;
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+          typingIndicator.remove();
+        }
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      async function clearMemory() {
+        try {
+          const response = await fetch('/api/memory/clear-all', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({})
+          });
+
+          if (response.ok) {
+            // Add system message to chat
+            addSystemMessage('🗑️ Memory cleared! Starting fresh conversation.');
+            
+            // Generate new user ID for fresh start
+            userId = 'user_' + Math.random().toString(36).substr(2, 9);
+          } else {
+            addSystemMessage('❌ Failed to clear memory. Please try again.');
+          }
+        } catch (error) {
+          console.error('Error clearing memory:', error);
+          addSystemMessage('❌ Error clearing memory. Please try again.');
+        }
+      }
+
+      function addSystemMessage(message) {
+        const chatMessages = document.getElementById('chat-messages');
+        const systemDiv = document.createElement('div');
+        systemDiv.className = 'flex justify-center mb-4';
+        systemDiv.innerHTML = `
+          <div class="bg-blue-100 border border-blue-300 rounded-lg p-2 max-w-md">
+            <p class="text-blue-800 text-xs text-center">${escapeHtml(message)}</p>
+          </div>
+        `;
+        chatMessages.appendChild(systemDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Focus on input when page loads
+      window.onload = function() {
+        document.getElementById('message-input').focus();
+      };
+    </script>
+  </body>
+</html> 

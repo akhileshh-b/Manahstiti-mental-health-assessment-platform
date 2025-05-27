@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Manahstiti - Your Anonymous Mental Health Companion</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e9f1e9] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#101910]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#101910] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#1E5245] text-sm font-semibold leading-normal" href="/">Home</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/resources">Resources</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/about">About</a>
+            </div>
+            
+            <!-- Authentication Section -->
+            <div id="auth-section">
+              <!-- Login Button (shown when not authenticated) -->
+              <button
+                id="loginBtn"
+                onclick="window.location.href='/login'"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1E5245] text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#2a6b56] transition-colors"
+              >
+                <span class="truncate">Login / Start Assessment</span>
+              </button>
+              
+              <!-- User Profile Dropdown (shown when authenticated) -->
+              <div id="userProfileSection" class="relative hidden">
+                <button
+                  id="profileDropdownBtn"
+                  onclick="toggleProfileDropdown()"
+                  class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#f8fcf8] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+                >
+                  <!-- User Avatar -->
+                  <div class="w-8 h-8 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                    <span id="userInitials">U</span>
+                  </div>
+                  <!-- User Name -->
+                  <span id="userName" class="text-[#101910] text-sm font-medium hidden sm:block">Loading...</span>
+                  <!-- Dropdown Arrow -->
+                  <svg id="dropdownArrow" class="w-4 h-4 text-[#578e57] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                
+                <!-- Dropdown Menu -->
+                <div
+                  id="profileDropdown"
+                  class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-[#e9f1e9] py-2 z-50 hidden"
+                >
+                  <!-- User Info Section -->
+                  <div class="px-4 py-3 border-b border-[#e9f1e9]">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white font-semibold">
+                        <span id="dropdownUserInitials">U</span>
+                      </div>
+                      <div>
+                        <p id="dropdownUserName" class="text-[#101910] font-medium text-sm">Loading...</p>
+                        <p id="dropdownUserEmail" class="text-[#578e57] text-xs">Loading...</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Menu Items -->
+                  <div class="py-1">
+                    <a href="/assessment" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                      <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                      </svg>
+                      <span class="text-sm">Take Assessment</span>
+                    </a>
+                    
+                    <a href="/profile" class="w-full flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                      <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                              </svg>
+                        <span class="text-sm">Edit Profile</span>
+                      </a>
+                    
+                    <a href="/chat" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                      <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                      </svg>
+                      <span class="text-sm">AI Friend</span>
+                    </a>
+                    
+                    <a href="/resources" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                      <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                      </svg>
+                      <span class="text-sm">Resources</span>
+                    </a>
+                  </div>
+                  
+                  <!-- Divider -->
+                  <div class="border-t border-[#e9f1e9] my-1"></div>
+                  
+                  <!-- Logout -->
+                  <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    <span class="text-sm font-medium">Logout</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="@container">
+              <div class="@[480px]:p-4">
+                <div
+                  class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 relative"
+                  style='background-image: url("/static/images/homepage.jpg");'
+                >
+                  <!-- Dark overlay with blur effect -->
+                  <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm @[480px]:rounded-xl"></div>
+                  <div class="flex flex-col gap-2 text-center relative z-10">
+                    <h1
+                      class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] drop-shadow-2xl text-shadow-lg"
+                      style="text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6);"
+                    >
+                      Your Mental Wellness, Our Priority
+                    </h1>
+                    <h2 class="text-white text-sm font-medium leading-normal @[480px]:text-base @[480px]:font-medium @[480px]:leading-normal drop-shadow-xl"
+                        style="text-shadow: 1px 1px 6px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.5);">
+                      Manahstiti is your confidential space for mental health check-ins and support, designed specifically for students. Take our scientifically-backed 50-question quiz to gain insights into your mental health.
+                    </h2>
+                  </div>
+                  <div class="flex gap-4 flex-wrap justify-center relative z-10">
+                                      <button
+                    onclick="window.location.href='/login'"
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#1E5245] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] shadow-2xl hover:bg-[#2a6b56] transition-all duration-300"
+                  >
+                    <span class="truncate">Start Assessment</span>
+                  </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="text-center px-4 py-8">
+              <h2 class="text-[#101910] text-[36px] font-black leading-tight tracking-[-0.025em] mb-2 @[480px]:text-[42px]">Key Features</h2>
+              <div class="w-24 h-1 bg-[#1E5245] mx-auto rounded-full mb-4"></div>
+              <p class="text-[#578e57] text-lg font-medium">Discover what makes Manahstiti special</p>
+            </div>
+            <div class="flex flex-col gap-10 px-4 py-10 @container">
+              <div class="flex flex-col gap-4">
+                <h1
+                  class="text-[#101910] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+                >
+                  Comprehensive Mental Health Support
+                </h1>
+                <p class="text-[#101910] text-base font-normal leading-normal max-w-[720px]">
+                  Explore the features that make Manahstiti the go-to platform for student mental wellness.
+                </p>
+              </div>
+              <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("/static/images/Daily Mindfulness Routine.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">50-Question Assessment</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">A thorough evaluation covering mood, stress, sleep, social life, and academic pressures.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("/static/images/Crisis Support Button Emergency Help.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">Anonymous &amp; Private</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">No personal data collected. GDPR-compliant and completely anonymous.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("/static/images/Peer Support Forums In-App or Linked.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">Personalized Support</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">Get tailored mental health recommendations and support based on your assessment results.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-col gap-10 px-4 py-10 @container">
+              <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("/static/images/CBT-Based Journaling Prompts.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">Science-Backed Results</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">99.17% accurate ML model provides reliable mental health classification.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("/static/images/Recommendations for Professional Help.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">Personalized Resources</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">Get tailored mental health resources and recommendations based on your results.</p>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-3 pb-3">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+                    style='background-image: url("/static/images/Balanced Lifestyle Tips.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">Student-Focused</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">Designed specifically for student challenges including academic stress and social pressures.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- How It Works Section -->
+            <div class="flex flex-col gap-6 px-4 py-8">
+              <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em]">How It Works</h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex flex-col items-center text-center gap-4 p-4">
+                  <div class="w-16 h-16 rounded-full bg-[#1E5245] flex items-center justify-center text-white text-2xl font-bold">1</div>
+                  <h3 class="text-[#101910] text-lg font-bold">Take Assessment</h3>
+                  <p class="text-[#578e57] text-sm">Answer 50 questions about your mood, stress, sleep, social life, and academic pressure (5-10 minutes).</p>
+                </div>
+                <div class="flex flex-col items-center text-center gap-4 p-4">
+                  <div class="w-16 h-16 rounded-full bg-[#1E5245] flex items-center justify-center text-white text-2xl font-bold">2</div>
+                  <h3 class="text-[#101910] text-lg font-bold">Get Results</h3>
+                  <p class="text-[#578e57] text-sm">Receive your mental health classification (Good, Moderate, or Poor) with detailed insights.</p>
+                </div>
+                <div class="flex flex-col items-center text-center gap-4 p-4">
+                  <div class="w-16 h-16 rounded-full bg-[#1E5245] flex items-center justify-center text-white text-2xl font-bold">3</div>
+                  <h3 class="text-[#101910] text-lg font-bold">Access Support</h3>
+                  <p class="text-[#578e57] text-sm">Get personalized resources, access mental health tools, or find crisis support if needed.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="@container">
+              <div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:px-10 @[480px]:py-20">
+                <div class="flex flex-col gap-2 text-center items-center">
+                  <h1
+                    class="text-[#101910] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+                  >
+                    Ready to Prioritize Your Mental Health?
+                  </h1>
+                  <p class="text-[#101910] text-base font-normal leading-normal max-w-[720px]">Take the first step towards a healthier, happier you with Manahstiti. Join thousands of students who have taken control of their mental health.</p>
+                </div>
+                <div class="flex flex-1 justify-center">
+                  <div class="flex justify-center gap-4">
+                                      <button
+                    onclick="window.location.href='/login'"
+                    class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-[#1E5245] text-white text-base font-bold leading-normal tracking-[0.015em]"
+                  >
+                    <span class="truncate">Start Assessment</span>
+                  </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonials Section -->
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">What Students Say</h2>
+            <div class="flex overflow-y-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <div class="flex items-stretch p-4 gap-3">
+                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl flex flex-col"
+                    style='background-image: url("/static/images/Gratitude Journaling.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">"Manahstiti helped me understand my stress levels and provided helpful resources during exam season."</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">- Anya Sharma, University Student</p>
+                  </div>
+                </div>
+                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl flex flex-col"
+                    style='background-image: url("/static/images/Music Therapy.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">"The personalized recommendations and support resources have made me feel less alone during difficult times."</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">- Owen Carter, College Student</p>
+                  </div>
+                </div>
+                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60">
+                  <div
+                    class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl flex flex-col"
+                    style='background-image: url("/static/images/Weekly Mood Tracking.jpg");'
+                  ></div>
+                  <div>
+                    <p class="text-[#101910] text-base font-medium leading-normal">"The personalized recommendations have made a real difference in my mental well-being and study habits."</p>
+                    <p class="text-[#578e57] text-sm font-normal leading-normal">- Sophia Bennett, Student</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- About Section -->
+            <h2 class="text-[#101910] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">About Manahstiti</h2>
+            <p class="text-[#101910] text-base font-normal leading-normal pb-3 pt-1 px-4">
+              Manahstiti is dedicated to providing students with a safe and confidential space to assess and improve their mental health. Our science-backed approach with 99.17% accuracy and student-focused design ensure you receive the support you need to thrive academically and personally.
+            </p>
+            <div class="flex px-4 py-3 justify-start">
+              <button
+                onclick="window.location.href='/about'"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e9f1e9] text-[#101910] text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Learn More</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <footer class="flex justify-center">
+          <div class="flex max-w-[960px] flex-1 flex-col">
+            <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
+              <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
+                <a class="text-[#578e57] text-base font-normal leading-normal min-w-40" href="/about">About Manahstiti</a>
+                <a class="text-[#578e57] text-base font-normal leading-normal min-w-40" href="/crisis">Crisis Support</a>
+                <a class="text-[#578e57] text-base font-normal leading-normal min-w-40" href="/resources">Mental Health Resources</a>
+              </div>
+              <div class="flex flex-col gap-2">
+                <p class="text-[#578e57] text-base font-normal leading-normal">© 2024 Manahstiti. All rights reserved.</p>
+                <p class="text-[#578e57] text-sm font-normal leading-normal">Anonymous • GDPR Compliant • Not a substitute for professional medical advice</p>
+              </div>
+            </footer>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- Appwrite SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+    
+    <script>
+      // Appwrite Configuration
+      const client = new Appwrite.Client();
+      client
+        .setEndpoint('https://fra.cloud.appwrite.io/v1') // Your Frankfurt endpoint
+        .setProject('manahstiti-mental-health-lays'); // Your project ID
+
+      const account = new Appwrite.Account(client);
+
+      let currentUser = null;
+
+      // Check authentication status on page load
+      async function checkAuthStatus() {
+        try {
+          currentUser = await account.get();
+          console.log('User authenticated:', currentUser);
+          
+          // Show user profile, hide login button
+          document.getElementById('loginBtn').classList.add('hidden');
+          document.getElementById('userProfileSection').classList.remove('hidden');
+          
+          // Update profile information
+          updateProfileInfo(currentUser);
+          
+        } catch (error) {
+          console.log('User not authenticated');
+          // Show login button, hide user profile
+          document.getElementById('loginBtn').classList.remove('hidden');
+          document.getElementById('userProfileSection').classList.add('hidden');
+        }
+      }
+
+      // Update profile information in the UI
+      function updateProfileInfo(user) {
+        const name = user.name || 'User';
+        const email = user.email || '';
+        
+        // Get initials from name
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        // Update header profile
+        document.getElementById('userName').textContent = name;
+        document.getElementById('userInitials').textContent = initials;
+        
+        // Update dropdown profile
+        document.getElementById('dropdownUserName').textContent = name;
+        document.getElementById('dropdownUserEmail').textContent = email;
+        document.getElementById('dropdownUserInitials').textContent = initials;
+      }
+
+      // Toggle profile dropdown
+      function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profileDropdown');
+        const arrow = document.getElementById('dropdownArrow');
+        
+        if (dropdown.classList.contains('hidden')) {
+          dropdown.classList.remove('hidden');
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          dropdown.classList.add('hidden');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('profileDropdown');
+        const button = document.getElementById('profileDropdownBtn');
+        
+        if (dropdown && button && !dropdown.contains(event.target) && !button.contains(event.target)) {
+          dropdown.classList.add('hidden');
+          const arrow = document.getElementById('dropdownArrow');
+          if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+      });
+
+
+
+      // Logout function
+      async function logout() {
+        try {
+          await account.deleteSession('current');
+          window.location.reload(); // Refresh to show login state
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.reload();
+        }
+      }
+
+      // Check authentication when page loads
+      document.addEventListener('DOMContentLoaded', checkAuthStatus);
+    </script>
+  </body>
+</html> 

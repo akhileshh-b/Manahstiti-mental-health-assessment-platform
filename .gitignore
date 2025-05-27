@@ -1,0 +1,625 @@
+# =============================================================================
+# Manahstiti - Mental Health Assessment Platform
+# Comprehensive .gitignore for GitHub deployment
+# =============================================================================
+
+# =============================================================================
+# ENVIRONMENT & SECRETS (CRITICAL - NEVER COMMIT)
+# =============================================================================
+.env
+.env.*
+*.env
+environment.local
+environment.production
+environment.staging
+
+# API Keys and Credentials
+*secret*
+*key*
+*token*
+*password*
+*credentials*
+*config.json
+secrets.json
+
+# =============================================================================
+# DATABASE FILES (USER DATA - NEVER COMMIT)
+# =============================================================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+manahstiti.db
+manahstiti_*.db
+database/
+data/
+
+# Chat memory files (runtime data)
+chat_memories.json
+*_memories.json
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# =============================================================================
+# NODE.JS & FRONTEND
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+public
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# =============================================================================
+# MACHINE LEARNING & DATA
+# =============================================================================
+# Large dataset files (GitHub has 100MB limit)
+*.csv
+*.tsv
+*.json.gz
+*.parquet
+*.h5
+*.hdf5
+*.pickle
+*.pkl.gz
+
+# Specific large files
+reference/mental_health_dataset_1M.csv
+datasets/
+data/raw/
+data/processed/
+
+# Model checkpoints and training artifacts
+checkpoints/
+models/saved/
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Weights & Biases
+wandb/
+
+# TensorBoard logs
+logs/
+tensorboard/
+
+# =============================================================================
+# IDEs & EDITORS
+# =============================================================================
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+.netrwhist
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Atom
+.atom/
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# =============================================================================
+# OPERATING SYSTEMS
+# =============================================================================
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDouble
+.LSOverride
+Icon
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# LOGS & TEMPORARY FILES
+# =============================================================================
+# Log files
+*.log
+logs/
+log/
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.tmp/
+temp/
+tmp/
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# =============================================================================
+# DEPLOYMENT & CLOUD
+# =============================================================================
+# Docker
+.dockerignore
+Dockerfile.local
+docker-compose.override.yml
+.docker/
+
+# Kubernetes
+*.kubeconfig
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# AWS
+.aws/
+
+# Google Cloud
+.gcloud/
+gcloud-service-key.json
+
+# Azure
+.azure/
+
+# Heroku
+.heroku/
+
+# Vercel
+.vercel
+
+# Netlify
+.netlify
+
+# =============================================================================
+# SECURITY & CERTIFICATES
+# =============================================================================
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.cert
+*.p12
+*.pfx
+
+# SSH keys
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# GPG keys
+*.gpg
+*.asc
+
+# =============================================================================
+# DEVELOPMENT & TESTING
+# =============================================================================
+# Test coverage
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.pytest_cache/
+.ruff_cache/
+
+# Profiling
+*.prof
+*.lprof
+
+# Benchmarking
+benchmark_results/
+
+# Local development
+.local/
+local/
+dev/
+
+# =============================================================================
+# MANAHSTITI SPECIFIC
+# =============================================================================
+# User uploaded content
+uploads/
+user_data/
+assessments/
+
+# Generated reports
+reports/
+exports/
+
+# Cache directories
+.cache/
+cache/
+
+# Session files
+sessions/
+flask_session/
+
+# Custom configurations
+config.local.py
+settings.local.py
+
+# Development databases
+dev.db
+test.db
+local.db
+
+# Memory dumps
+*.dmp
+*.dump
+
+# =============================================================================
+# DOCUMENTATION BUILD
+# =============================================================================
+# Sphinx
+docs/_build/
+docs/build/
+
+# MkDocs
+site/
+
+# GitBook
+_book/
+
+# =============================================================================
+# PACKAGE MANAGERS
+# =============================================================================
+# Conda
+.conda/
+*.conda
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Poetry
+poetry.lock
+
+# Pipenv
+Pipfile.lock
+
+# =============================================================================
+# MONITORING & ANALYTICS
+# =============================================================================
+# Application monitoring
+.newrelic.ini
+newrelic.ini
+
+# Analytics
+.analytics/
+
+# Performance monitoring
+.apm/
+
+# =============================================================================
+# MISC
+# =============================================================================
+# Compressed files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Large media files (if any)
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+
+# =============================================================================
+# END OF .gitignore
+# ============================================================================= 

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Email Verification - Manahstiti</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <!-- Header -->
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e9f1e9] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#101910]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#101910] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="/" class="text-[#578e57] text-sm font-medium leading-normal hover:text-[#1E5245]">← Back to Home</a>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="flex flex-1 justify-center items-center py-10 px-4">
+          <div class="w-full max-w-md">
+            <!-- Verification Container -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 border border-[#e9f1e9]">
+              
+              <!-- Loading State -->
+              <div id="loading" class="text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1E5245] mx-auto mb-4"></div>
+                <h1 class="text-xl font-bold text-[#101910] mb-2">Verifying Your Email</h1>
+                <p class="text-[#578e57] text-sm">Please wait while we verify your email address...</p>
+              </div>
+
+              <!-- Success State -->
+              <div id="success" class="text-center hidden">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-[#101910] mb-2">Email Verified!</h1>
+                <p class="text-[#578e57] text-sm mb-6">Your email has been successfully verified. You can now access all features of Manahstiti.</p>
+                <button
+                  onclick="window.location.href='/assessment'"
+                  class="w-full bg-[#1E5245] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#2a6b56] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+                >
+                  Continue to Assessment
+                </button>
+              </div>
+
+              <!-- Error State -->
+              <div id="error" class="text-center hidden">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-[#101910] mb-2">Verification Failed</h1>
+                <p id="errorMessage" class="text-[#578e57] text-sm mb-6">The verification link is invalid or has expired.</p>
+                <div class="space-y-3">
+                  <button
+                    id="resendBtn"
+                    onclick="resendVerification()"
+                    class="w-full bg-[#1E5245] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#2a6b56] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+                  >
+                    Resend Verification Email
+                  </button>
+                  <button
+                    onclick="window.location.href='/login'"
+                    class="w-full bg-gray-100 text-[#101910] py-3 px-4 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
+                  >
+                    Back to Login
+                  </button>
+                </div>
+              </div>
+
+              <!-- Already Verified State -->
+              <div id="alreadyVerified" class="text-center hidden">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h1 class="text-2xl font-bold text-[#101910] mb-2">Already Verified</h1>
+                <p class="text-[#578e57] text-sm mb-6">Your email is already verified. You can continue using Manahstiti.</p>
+                <button
+                  onclick="window.location.href='/assessment'"
+                  class="w-full bg-[#1E5245] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#2a6b56] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+                >
+                  Continue to Assessment
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Info Notice -->
+            <div class="mt-6 p-4 bg-[#f0f7f0] rounded-lg">
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-[#1E5245]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-sm font-medium text-[#1E5245]">Email Verification</h3>
+                  <p class="text-xs text-[#578e57] mt-1">
+                    Email verification helps secure your account and ensures you receive important notifications about your mental health journey.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Appwrite Configuration
+      const client = new Appwrite.Client();
+      client
+        .setEndpoint('https://fra.cloud.appwrite.io/v1') // Your Frankfurt endpoint
+        .setProject('manahstiti-mental-health-lays'); // Your project ID
+
+      const account = new Appwrite.Account(client);
+
+      // Show specific state
+      function showState(state) {
+        const states = ['loading', 'success', 'error', 'alreadyVerified'];
+        states.forEach(s => {
+          document.getElementById(s).classList.add('hidden');
+        });
+        document.getElementById(state).classList.remove('hidden');
+      }
+
+      // Verify email on page load
+      async function verifyEmail() {
+        try {
+          // Get URL parameters
+          const urlParams = new URLSearchParams(window.location.search);
+          const userId = urlParams.get('userId');
+          const secret = urlParams.get('secret');
+
+          if (!userId || !secret) {
+            throw new Error('Invalid verification link. Missing required parameters.');
+          }
+
+          // Attempt to verify the email
+          await account.updateVerification(userId, secret);
+          
+          // Success
+          showState('success');
+          
+        } catch (error) {
+          console.error('Email verification error:', error);
+          
+          // Handle specific error cases
+          let errorMessage = 'The verification link is invalid or has expired.';
+          
+          if (error.code === 401) {
+            errorMessage = 'Invalid verification credentials.';
+          } else if (error.code === 404) {
+            errorMessage = 'Verification request not found.';
+          } else if (error.code === 409) {
+            // User is already verified
+            showState('alreadyVerified');
+            return;
+          } else if (error.message) {
+            errorMessage = error.message;
+          }
+          
+          document.getElementById('errorMessage').textContent = errorMessage;
+          showState('error');
+        }
+      }
+
+      // Resend verification email
+      async function resendVerification() {
+        const resendBtn = document.getElementById('resendBtn');
+        const originalText = resendBtn.textContent;
+        
+        try {
+          resendBtn.disabled = true;
+          resendBtn.textContent = 'Sending...';
+          
+          // Check if user is logged in
+          const user = await account.get();
+          
+          // Send new verification email
+          await account.createVerification(`${window.location.origin}/verify-email`);
+          
+          // Show success message
+          document.getElementById('errorMessage').textContent = 'A new verification email has been sent to your email address.';
+          resendBtn.textContent = 'Email Sent!';
+          resendBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+          resendBtn.classList.remove('bg-[#1E5245]', 'hover:bg-[#2a6b56]');
+          
+          // Reset button after 3 seconds
+          setTimeout(() => {
+            resendBtn.textContent = originalText;
+            resendBtn.disabled = false;
+            resendBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+            resendBtn.classList.add('bg-[#1E5245]', 'hover:bg-[#2a6b56]');
+          }, 3000);
+          
+        } catch (error) {
+          console.error('Resend verification error:', error);
+          
+          let errorMessage = 'Failed to resend verification email.';
+          if (error.code === 429) {
+            errorMessage = 'Too many requests. Please wait before trying again.';
+          } else if (error.message) {
+            errorMessage = error.message;
+          }
+          
+          document.getElementById('errorMessage').textContent = errorMessage;
+          resendBtn.textContent = originalText;
+          resendBtn.disabled = false;
+        }
+      }
+
+      // Start verification process on page load
+      verifyEmail();
+    </script>
+  </body>
+</html> 

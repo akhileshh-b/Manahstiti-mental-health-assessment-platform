@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Mental Health Assessment - Manahstiti</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e9f1e9] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#101910]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#101910] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/">Home</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/dashboard">Dashboard</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/resources">Resources</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/about">About</a>
+            </div>
+            
+            <!-- User Profile Dropdown -->
+            <div class="relative">
+              <button
+                id="profileDropdownBtn"
+                onclick="toggleProfileDropdown()"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#f8fcf8] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+              >
+                <!-- User Avatar -->
+                <div class="w-8 h-8 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                  <span id="userInitials">U</span>
+                </div>
+                <!-- User Name -->
+                <span id="userName" class="text-[#101910] text-sm font-medium hidden sm:block">Loading...</span>
+                <!-- Dropdown Arrow -->
+                <svg id="dropdownArrow" class="w-4 h-4 text-[#578e57] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div
+                id="profileDropdown"
+                class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-[#e9f1e9] py-2 z-50 hidden"
+              >
+                <!-- User Info Section -->
+                <div class="px-4 py-3 border-b border-[#e9f1e9]">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white font-semibold">
+                      <span id="dropdownUserInitials">U</span>
+                    </div>
+                    <div>
+                      <p id="dropdownUserName" class="text-[#101910] font-medium text-sm">Loading...</p>
+                      <p id="dropdownUserEmail" class="text-[#578e57] text-xs">Loading...</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Menu Items -->
+                <div class="py-1">
+                  <a href="/profile" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    <span class="text-sm">Edit Profile</span>
+                  </button>
+                  
+                  <a href="/chat" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span class="text-sm">AI Friend</span>
+                  </a>
+                  
+                  <a href="/resources" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <span class="text-sm">Resources</span>
+                  </button>
+                </div>
+                
+                <!-- Divider -->
+                <div class="border-t border-[#e9f1e9] my-1"></div>
+                
+                <!-- Logout -->
+                <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        
+        <!-- Progress Section -->
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-col gap-3 p-4">
+              <div class="flex gap-6 justify-between">
+                <p class="text-[#101910] text-base font-medium leading-normal">Progress</p>
+                <p id="dimension-indicator" class="text-[#578e57] text-sm font-normal leading-normal"></p>
+              </div>
+              <div class="rounded bg-[#d3e4d3]">
+                <div id="progress-bar" class="h-2 rounded bg-[#bdeebd]" style="width: 2%;"></div>
+              </div>
+              <p id="progress-text" class="text-[#578e57] text-sm font-normal leading-normal">1/50</p>
+            </div>
+            
+            <!-- Question Section -->
+            <h2 id="question-text" class="text-[#101910] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
+              Loading question...
+            </h2>
+            
+            <!-- Answer Options -->
+            <div id="answer-options" class="flex flex-wrap gap-3 p-4">
+              <!-- Options will be loaded dynamically -->
+            </div>
+            
+            <!-- Navigation Buttons -->
+            <div class="flex justify-stretch">
+              <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-between">
+                <button
+                  id="previous-btn"
+                  onclick="previousQuestion()"
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#e9f1e9] text-[#101910] text-sm font-bold leading-normal tracking-[0.015em] disabled:opacity-50"
+                  disabled
+                >
+                  <span class="truncate">Previous</span>
+                </button>
+                <button
+                  id="next-btn"
+                  onclick="nextQuestion()"
+                  class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#bdeebd] text-[#101910] text-sm font-bold leading-normal tracking-[0.015em] disabled:opacity-50"
+                  disabled
+                >
+                  <span class="truncate">Next</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Instructions -->
+            <div class="px-4 py-6 bg-[#e9f1e9] rounded-xl mx-4 mt-6">
+              <h3 class="text-[#101910] text-lg font-bold mb-2">Assessment Instructions</h3>
+              <ul class="text-[#578e57] text-sm space-y-1">
+                <li>• Answer honestly - your responses are completely anonymous</li>
+                <li>• Choose the option that best describes your experience over the past two weeks</li>
+                <li>• This assessment takes approximately 5-10 minutes to complete</li>
+                <li>• You can go back to change previous answers if needed</li>
+                <li>• No personal data is stored - privacy guaranteed</li>
+                <li>• <strong>Keyboard shortcuts:</strong> Use 1-5 keys to select answers, Enter to go next, ← → arrow keys to navigate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Appwrite Configuration
+      const client = new Appwrite.Client();
+      client
+        .setEndpoint('https://fra.cloud.appwrite.io/v1') // Your Frankfurt endpoint
+        .setProject('manahstiti-mental-health-lays'); // Your project ID
+
+      const account = new Appwrite.Account(client);
+      const databases = new Appwrite.Databases(client);
+
+      // Database Configuration
+      const DATABASE_ID = '6834e4790036ae46ecce';
+      const ASSESSMENTS_COLLECTION_ID = '6834e4a100351df915b4';
+
+      let questions = [];
+      let currentQuestionIndex = 0;
+      let responses = new Array(50).fill(null);
+      let currentUser = null;
+      
+      // Response options mapping
+      const responseOptions = [
+        { value: 1, text: "Never / Not at all" },
+        { value: 2, text: "Rarely / Several days" },
+        { value: 3, text: "Sometimes / More than half the days" },
+        { value: 4, text: "Often / Nearly every day" },
+        { value: 5, text: "Always / Every day" }
+      ];
+
+      // Authentication check
+      async function checkAuthentication() {
+        try {
+          currentUser = await account.get();
+          console.log('User authenticated:', currentUser);
+          
+          // Update profile information
+          updateProfileInfo(currentUser);
+          
+          // Load questions after authentication
+          loadQuestions();
+        } catch (error) {
+          console.error('User not authenticated:', error);
+          // Redirect to login page
+          window.location.href = '/login';
+        }
+      }
+
+      // Update profile information in the UI
+      function updateProfileInfo(user) {
+        const name = user.name || 'User';
+        const email = user.email || '';
+        
+        // Get initials from name
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        // Update header profile
+        document.getElementById('userName').textContent = name;
+        document.getElementById('userInitials').textContent = initials;
+        
+        // Update dropdown profile
+        document.getElementById('dropdownUserName').textContent = name;
+        document.getElementById('dropdownUserEmail').textContent = email;
+        document.getElementById('dropdownUserInitials').textContent = initials;
+      }
+
+      // Toggle profile dropdown
+      function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profileDropdown');
+        const arrow = document.getElementById('dropdownArrow');
+        
+        if (dropdown.classList.contains('hidden')) {
+          dropdown.classList.remove('hidden');
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          dropdown.classList.add('hidden');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('profileDropdown');
+        const button = document.getElementById('profileDropdownBtn');
+        
+        if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+          dropdown.classList.add('hidden');
+          document.getElementById('dropdownArrow').style.transform = 'rotate(0deg)';
+        }
+      });
+
+
+
+      // Logout function
+      async function logout() {
+        try {
+          await account.deleteSession('current');
+          window.location.href = '/login';
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '/login';
+        }
+      }
+
+      // Load questions from API
+      async function loadQuestions() {
+        try {
+          const response = await fetch('/api/questions');
+          const data = await response.json();
+          questions = data.questions;
+          displayQuestion();
+        } catch (error) {
+          console.error('Error loading questions:', error);
+          document.getElementById('question-text').textContent = 'Error loading questions. Please refresh the page.';
+        }
+      }
+
+      // Display current question
+      function displayQuestion() {
+        if (questions.length === 0) return;
+        
+        // Remove any existing hint
+        const existingHint = document.getElementById('enter-hint');
+        if (existingHint) {
+          existingHint.remove();
+        }
+        
+        const question = questions[currentQuestionIndex];
+        document.getElementById('question-text').textContent = question.question;
+        
+        // Update progress
+        const progressPercent = ((currentQuestionIndex + 1) / 50) * 100;
+        document.getElementById('progress-bar').style.width = progressPercent + '%';
+        document.getElementById('progress-text').textContent = `${currentQuestionIndex + 1}/50`;
+        document.getElementById('dimension-indicator').textContent = question.dimension;
+        
+        // Create answer options
+        const optionsContainer = document.getElementById('answer-options');
+        optionsContainer.innerHTML = '';
+        
+        responseOptions.forEach(option => {
+          const label = document.createElement('label');
+          label.className = `text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#d3e4d3] px-4 h-11 text-[#101910] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#bdeebd] relative cursor-pointer transition-all duration-200 hover:bg-[#f0f9f0]`;
+          
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.className = 'invisible absolute';
+          input.name = `question-${currentQuestionIndex}`;
+          input.value = option.value;
+          input.onchange = () => selectAnswer(option.value);
+          
+          // Check if this option was previously selected
+          if (responses[currentQuestionIndex] === option.value) {
+            input.checked = true;
+            label.classList.add('border-[3px]', 'px-3.5', 'border-[#bdeebd]');
+          }
+          
+          label.appendChild(document.createTextNode(option.text));
+          label.appendChild(input);
+          optionsContainer.appendChild(label);
+        });
+        
+        // Update navigation buttons
+        document.getElementById('previous-btn').disabled = currentQuestionIndex === 0;
+        document.getElementById('next-btn').disabled = responses[currentQuestionIndex] === null;
+        
+        // Update next button text
+        const nextBtn = document.getElementById('next-btn');
+        if (currentQuestionIndex === 49) {
+          nextBtn.innerHTML = '<span class="truncate">Submit Assessment</span>';
+        } else {
+          nextBtn.innerHTML = '<span class="truncate">Next</span>';
+        }
+      }
+
+      // Select an answer
+      function selectAnswer(value) {
+        responses[currentQuestionIndex] = value;
+        document.getElementById('next-btn').disabled = false;
+        
+        // Add visual feedback
+        const labels = document.querySelectorAll('#answer-options label');
+        labels.forEach(label => {
+          label.classList.remove('border-[3px]', 'px-3.5', 'border-[#bdeebd]');
+          if (label.querySelector('input').value == value) {
+            label.classList.add('border-[3px]', 'px-3.5', 'border-[#bdeebd]');
+          }
+        });
+        
+        // Show a subtle hint that Enter can be used
+        if (!document.getElementById('enter-hint')) {
+          const hint = document.createElement('div');
+          hint.id = 'enter-hint';
+          hint.className = 'text-[#578e57] text-xs mt-2 text-center opacity-75';
+          hint.textContent = 'Press Enter to continue to next question';
+          document.getElementById('answer-options').appendChild(hint);
+          
+          // Remove hint after 3 seconds
+          setTimeout(() => {
+            const hintElement = document.getElementById('enter-hint');
+            if (hintElement) {
+              hintElement.remove();
+            }
+          }, 3000);
+        }
+      }
+
+      // Navigate to previous question
+      function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+          currentQuestionIndex--;
+          displayQuestion();
+        }
+      }
+
+      // Navigate to next question or submit
+      function nextQuestion() {
+        if (responses[currentQuestionIndex] === null) return;
+        
+        if (currentQuestionIndex < 49) {
+          currentQuestionIndex++;
+          displayQuestion();
+        } else {
+          submitAssessment();
+        }
+      }
+
+      // Submit assessment
+      async function submitAssessment() {
+        // Check if all questions are answered
+        if (responses.includes(null)) {
+          alert('Please answer all questions before submitting.');
+          return;
+        }
+        
+        try {
+          // Show loading state
+          document.getElementById('next-btn').innerHTML = '<span class="truncate">Submitting...</span>';
+          document.getElementById('next-btn').disabled = true;
+          
+
+          
+          // First, submit to Flask API for ML processing
+          const response = await fetch('/api/assessment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ responses: responses })
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            
+            // Save to Appwrite database
+            try {
+              const documentData = {
+                userId: currentUser.$id,
+                assessmentDate: new Date().toISOString(),
+                score: data.score,
+                finalScore: data.score,
+                classification: data.classification,
+                responses: JSON.stringify(responses),
+                recommendations: JSON.stringify(data.recommendations || [])
+              };
+              
+              const assessmentDoc = await databases.createDocument(
+                DATABASE_ID,
+                ASSESSMENTS_COLLECTION_ID,
+                Appwrite.ID.unique(),
+                documentData
+              );
+              
+              // Store results in session storage for results page
+              sessionStorage.setItem('assessmentResults', JSON.stringify(data));
+              window.location.href = '/results';
+              
+            } catch (appwriteError) {
+              console.error('Error saving to Appwrite:', appwriteError);
+              
+              // Show user-friendly error message
+              alert('Assessment completed but failed to save to your profile. Your results will still be shown.');
+              
+              // Still proceed to results even if Appwrite save fails
+              sessionStorage.setItem('assessmentResults', JSON.stringify(data));
+              window.location.href = '/results';
+            }
+          } else {
+            const error = await response.json();
+            alert('Error submitting assessment: ' + error.error);
+            document.getElementById('next-btn').innerHTML = '<span class="truncate">Submit Assessment</span>';
+            document.getElementById('next-btn').disabled = false;
+          }
+        } catch (error) {
+          console.error('Error submitting assessment:', error);
+          alert('Error submitting assessment. Please try again.');
+          document.getElementById('next-btn').innerHTML = '<span class="truncate">Submit Assessment</span>';
+          document.getElementById('next-btn').disabled = false;
+        }
+            }
+
+      // Handle keyboard navigation
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'ArrowLeft') {
+          previousQuestion();
+        } else if (event.key === 'ArrowRight' && responses[currentQuestionIndex] !== null) {
+          nextQuestion();
+        } else if (event.key === 'Enter' && responses[currentQuestionIndex] !== null) {
+          // Enter key moves to next question if an option is selected
+          event.preventDefault();
+          nextQuestion();
+        } else if (event.key >= '1' && event.key <= '5') {
+          const value = parseInt(event.key);
+          selectAnswer(value);
+        }
+      });
+
+      // Initialize authentication check when page loads
+      window.onload = checkAuthentication;
+    </script>
+  </body>
+</html> 

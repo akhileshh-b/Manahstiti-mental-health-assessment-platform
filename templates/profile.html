@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Edit Profile - Manahstiti</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@15.0.0"></script>
+  </head>
+  <body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f9fbf9] group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e9f1e9] px-10 py-3">
+          <div class="flex items-center gap-4 text-[#101910]">
+            <div class="size-4">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <h2 class="text-[#101910] text-lg font-bold leading-tight tracking-[-0.015em]">Manahstiti</h2>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/">Home</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/resources">Resources</a>
+              <a class="text-[#101910] text-sm font-medium leading-normal hover:text-[#1E5245] transition-colors" href="/about">About</a>
+            </div>
+            
+            <!-- User Profile Dropdown -->
+            <div class="relative">
+              <button
+                id="profileDropdownBtn"
+                onclick="toggleProfileDropdown()"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#f8fcf8] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+              >
+                <!-- User Avatar -->
+                <div class="w-8 h-8 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white text-sm font-semibold">
+                  <span id="userInitials">U</span>
+                </div>
+                <!-- User Name -->
+                <span id="userName" class="text-[#101910] text-sm font-medium hidden sm:block">Loading...</span>
+                <!-- Dropdown Arrow -->
+                <svg id="dropdownArrow" class="w-4 h-4 text-[#578e57] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div
+                id="profileDropdown"
+                class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-[#e9f1e9] py-2 z-50 hidden"
+              >
+                <!-- User Info Section -->
+                <div class="px-4 py-3 border-b border-[#e9f1e9]">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white font-semibold">
+                      <span id="dropdownUserInitials">U</span>
+                    </div>
+                    <div>
+                      <p id="dropdownUserName" class="text-[#101910] font-medium text-sm">Loading...</p>
+                      <p id="dropdownUserEmail" class="text-[#578e57] text-xs">Loading...</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Menu Items -->
+                <div class="py-1">
+                  <a href="/assessment" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="text-sm">Take Assessment</span>
+                  </a>
+                  
+                  <a href="/profile" class="flex items-center gap-3 px-4 py-2 text-[#1E5245] bg-[#f8fcf8] font-medium">
+                    <svg class="w-4 h-4 text-[#1E5245]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    <span class="text-sm">Edit Profile</span>
+                  </a>
+                  
+                  <a href="/chat" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                    <span class="text-sm">AI Friend</span>
+                  </a>
+                  
+                  <a href="/resources" class="flex items-center gap-3 px-4 py-2 text-[#101910] hover:bg-[#f8fcf8] transition-colors">
+                    <svg class="w-4 h-4 text-[#578e57]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <span class="text-sm">Resources</span>
+                  </a>
+                </div>
+                
+                <!-- Divider -->
+                <div class="border-t border-[#e9f1e9] my-1"></div>
+                
+                <!-- Logout -->
+                <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                  </svg>
+                  <span class="text-sm font-medium">Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <!-- Header Section -->
+            <div class="flex flex-col gap-3 p-4">
+              <h1 class="text-[#101910] text-[32px] font-bold leading-tight">Edit Profile</h1>
+              <p class="text-[#578e57] text-base font-normal leading-normal">Update your personal information and preferences</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading" class="flex justify-center items-center py-20">
+              <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1E5245]"></div>
+            </div>
+
+            <!-- Profile Form -->
+            <div id="profile-form" class="hidden">
+              <form id="updateProfileForm" class="space-y-6 p-4">
+                <!-- Profile Picture Section -->
+                <div class="bg-white rounded-xl p-6 border border-[#e9f1e9] shadow-sm">
+                  <h2 class="text-[#101910] text-lg font-bold mb-4">Profile Picture</h2>
+                  <div class="flex items-center gap-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-[#1E5245] to-[#2a6b56] rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                      <span id="profileInitials">U</span>
+                    </div>
+                    <div>
+                      <p class="text-[#101910] text-sm font-medium mb-2">Your profile picture is automatically generated from your initials</p>
+                      <p class="text-[#578e57] text-xs">Update your name below to change your initials</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="bg-white rounded-xl p-6 border border-[#e9f1e9] shadow-sm">
+                  <h2 class="text-[#101910] text-lg font-bold mb-4">Personal Information</h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label for="name" class="block text-[#101910] text-sm font-medium mb-2">Full Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="w-full px-4 py-3 border border-[#e9f1e9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:border-transparent"
+                        placeholder="Enter your full name"
+                      />
+                    </div>
+                    <div>
+                      <label for="email" class="block text-[#101910] text-sm font-medium mb-2">Email Address</label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="w-full px-4 py-3 border border-[#e9f1e9] rounded-lg bg-gray-50 text-gray-500"
+                        placeholder="your.email@example.com"
+                        readonly
+                      />
+                      <p class="text-[#578e57] text-xs mt-1">Email cannot be changed for security reasons</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Account Preferences -->
+                <div class="bg-white rounded-xl p-6 border border-[#e9f1e9] shadow-sm">
+                  <h2 class="text-[#101910] text-lg font-bold mb-4">Preferences</h2>
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p class="text-[#101910] text-sm font-medium">Email Notifications</p>
+                        <p class="text-[#578e57] text-xs">Receive updates about new features and resources</p>
+                      </div>
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="emailNotifications" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#1E5245]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1E5245]"></div>
+                      </label>
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p class="text-[#101910] text-sm font-medium">Assessment Reminders</p>
+                        <p class="text-[#578e57] text-xs">Get reminded to take regular mental health check-ins</p>
+                      </div>
+                      <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="assessmentReminders" class="sr-only peer">
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#1E5245]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#1E5245]"></div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Account Security -->
+                <div class="bg-white rounded-xl p-6 border border-[#e9f1e9] shadow-sm">
+                  <h2 class="text-[#101910] text-lg font-bold mb-4">Account Security</h2>
+                  <div class="space-y-4">
+                    <div>
+                      <p class="text-[#101910] text-sm font-medium mb-2">Password</p>
+                      <button
+                        type="button"
+                        onclick="changePassword()"
+                        class="px-4 py-2 bg-[#e9f1e9] text-[#101910] text-sm font-medium rounded-lg hover:bg-[#ddf0dd] transition-colors"
+                      >
+                        Change Password
+                      </button>
+                    </div>
+                    <div>
+                      <p class="text-[#101910] text-sm font-medium mb-2">Account Created</p>
+                      <p id="accountCreated" class="text-[#578e57] text-sm">Loading...</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex gap-4 p-4">
+                  <button
+                    type="submit"
+                    class="flex-1 bg-[#1E5245] text-white py-3 px-6 rounded-lg font-medium hover:bg-[#2a6b56] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#1E5245] focus:ring-offset-2"
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    type="button"
+                    onclick="window.history.back()"
+                    class="px-6 py-3 bg-[#e9f1e9] text-[#101910] font-medium rounded-lg hover:bg-[#ddf0dd] transition-colors duration-200"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" class="hidden p-4">
+              <div class="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+                <h3 class="text-red-800 text-lg font-bold mb-2">Error Loading Profile</h3>
+                <p class="text-red-600 text-sm mb-4">We couldn't load your profile data. Please try refreshing the page.</p>
+                <button
+                  onclick="window.location.reload()"
+                  class="bg-red-600 text-white py-2 px-6 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200"
+                >
+                  Refresh Page
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Appwrite Configuration
+      const client = new Appwrite.Client();
+      client
+        .setEndpoint('https://fra.cloud.appwrite.io/v1') // Your Frankfurt endpoint
+        .setProject('manahstiti-mental-health-lays'); // Your project ID
+
+      const account = new Appwrite.Account(client);
+
+      let currentUser = null;
+
+      // Authentication check
+      async function checkAuthentication() {
+        try {
+          currentUser = await account.get();
+          console.log('User authenticated:', currentUser);
+          
+          // Update profile information
+          updateProfileInfo(currentUser);
+          
+          // Load profile form
+          loadProfileForm();
+        } catch (error) {
+          console.error('User not authenticated:', error);
+          // Redirect to login page
+          window.location.href = '/login';
+        }
+      }
+
+      // Update profile information in the UI
+      function updateProfileInfo(user) {
+        const name = user.name || 'User';
+        const email = user.email || '';
+        
+        // Get initials from name
+        const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        
+        // Update header profile
+        document.getElementById('userName').textContent = name;
+        document.getElementById('userInitials').textContent = initials;
+        
+        // Update dropdown profile
+        document.getElementById('dropdownUserName').textContent = name;
+        document.getElementById('dropdownUserEmail').textContent = email;
+        document.getElementById('dropdownUserInitials').textContent = initials;
+      }
+
+      // Load profile form with user data
+      function loadProfileForm() {
+        try {
+          // Hide loading, show form
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('profile-form').classList.remove('hidden');
+          
+          // Populate form fields
+          document.getElementById('name').value = currentUser.name || '';
+          document.getElementById('email').value = currentUser.email || '';
+          
+          // Update profile initials in form
+          const initials = (currentUser.name || 'User').split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+          document.getElementById('profileInitials').textContent = initials;
+          
+          // Set account creation date
+          const createdDate = new Date(currentUser.$createdAt).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          document.getElementById('accountCreated').textContent = createdDate;
+          
+          // Set default preferences (you can store these in user preferences later)
+          document.getElementById('emailNotifications').checked = true;
+          document.getElementById('assessmentReminders').checked = true;
+          
+        } catch (error) {
+          console.error('Error loading profile form:', error);
+          document.getElementById('loading').classList.add('hidden');
+          document.getElementById('error-state').classList.remove('hidden');
+        }
+      }
+
+      // Toggle profile dropdown
+      function toggleProfileDropdown() {
+        const dropdown = document.getElementById('profileDropdown');
+        const arrow = document.getElementById('dropdownArrow');
+        
+        if (dropdown.classList.contains('hidden')) {
+          dropdown.classList.remove('hidden');
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          dropdown.classList.add('hidden');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('profileDropdown');
+        const button = document.getElementById('profileDropdownBtn');
+        
+        if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+          dropdown.classList.add('hidden');
+          document.getElementById('dropdownArrow').style.transform = 'rotate(0deg)';
+        }
+      });
+
+      // Logout function
+      async function logout() {
+        try {
+          await account.deleteSession('current');
+          window.location.href = '/login';
+        } catch (error) {
+          console.error('Logout error:', error);
+          window.location.href = '/login';
+        }
+      }
+
+      // Change password function
+      function changePassword() {
+        // For now, show an alert. In a full implementation, this would open a modal or redirect
+        alert('Password change functionality will be implemented soon. For now, you can reset your password from the login page.');
+      }
+
+      // Handle form submission
+      document.getElementById('updateProfileForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitButton = e.target.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        
+        try {
+          // Show loading state
+          submitButton.textContent = 'Saving...';
+          submitButton.disabled = true;
+          
+          // Get form data
+          const name = document.getElementById('name').value.trim();
+          
+          if (!name) {
+            throw new Error('Name is required');
+          }
+          
+          // Update user name in Appwrite
+          await account.updateName(name);
+          
+          // Update UI with new name
+          currentUser.name = name;
+          updateProfileInfo(currentUser);
+          
+          // Update profile initials in form
+          const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+          document.getElementById('profileInitials').textContent = initials;
+          
+          // Show success message
+          showNotification('Profile updated successfully!', 'success');
+          
+        } catch (error) {
+          console.error('Error updating profile:', error);
+          showNotification(error.message || 'Failed to update profile. Please try again.', 'error');
+        } finally {
+          // Reset button
+          submitButton.textContent = originalText;
+          submitButton.disabled = false;
+        }
+      });
+
+      // Show notification function
+      function showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
+          type === 'success' ? 'bg-green-50 border border-green-200 text-green-800' :
+          type === 'error' ? 'bg-red-50 border border-red-200 text-red-800' :
+          'bg-blue-50 border border-blue-200 text-blue-800'
+        }`;
+        notification.textContent = message;
+        
+        // Add to page
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 3000);
+      }
+
+      // Initialize profile page on load
+      window.onload = checkAuthentication;
+    </script>
+  </body>
+</html> 
